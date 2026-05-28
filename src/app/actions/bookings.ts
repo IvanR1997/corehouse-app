@@ -12,7 +12,7 @@ function packageExpiry(activatedAt: Date) {
   return exp
 }
 
-function activePackageWhere(userId: string, type: string) {
+function activePackageWhere(userId: string, type: 'GROUP' | 'PERSONAL') {
   const monthAgo = new Date()
   monthAgo.setMonth(monthAgo.getMonth() - 1)
   return {
@@ -21,7 +21,7 @@ function activePackageWhere(userId: string, type: string) {
     remainingSessions: { gt: 0 },
     package: { type },
     activatedAt: { gte: monthAgo },
-  } as const
+  }
 }
 
 export async function createBooking(sessionId: string): Promise<BookingState> {
