@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(CLIENT)
+  createdAt DateTime @default(now())
+
+  packages       ClientPackage[]
+  bookings        Booking[]
+  trainedSessions Session[]       @relation("TrainerSessions")
+}
+
+model Package {
+  id            String      @id @default(cuid())
+  name          String
+  description   String?
+  type          PackageType
+  totalSessions Int
+
+  clientPackages ClientPackage[]
+}
+
+model ClientPackage {
+  id                String    @id @default(cuid())
+  userId            String
+  packageId         String
+  remainingSessions Int
+  isActive          Boolean   @default(false)
+  activatedAt       DateTime?
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  package Package @relation(fields: [packageId], references: [id])
+}
+
+model Session {
+  id          String      @id @default(cuid())
+  type        PackageType
+  trainerId   String?
+  startTime   DateTime
+  maxCapacity Int         @default(15)
+  createdAt   DateTime    @default(now())
+
+  trainer  User?     @relation("TrainerSessions", fields: [trainerId], references: [id])
+  bookings Booking[]
+}
+
+model Booking {
+  id               String    @id @default(cuid())
+  clientId         String
+  sessionId        String
+  createdAt        DateTime  @default(now())
+  notificationRead Boolean   @default(false)
+  cancelledAt      DateTime?
+  lateCancellation Boolean   @default(false)
+
+  client  User    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@unique([clientId, sessionId])
+}
+
+model AdminNotification {
+  id        String   @id @default(cuid())
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  ADMIN
+  TRAINER
+  CLIENT
+}
+
+enum PackageType {
+  PERSONAL
+  GROUP
+}
