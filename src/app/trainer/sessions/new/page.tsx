@@ -36,29 +36,29 @@ export default function NewSessionPage() {
   return (
     <div className="max-w-lg">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-zinc-900">Novi termin</h1>
+        <h1 className="text-2xl font-bold text-white">Novi termin</h1>
         <p className="text-sm text-zinc-500 mt-1">Zakažite novi trening termin</p>
       </div>
 
       {state?.error && (
-        <div className="mb-4 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-600">
+        <div className="mb-4 rounded-lg bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm text-red-400">
           {state.error}
         </div>
       )}
 
-      <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow-sm">
         <form action={action} className="space-y-5">
           <input type="hidden" name="startTime" value={startTime} />
 
           <div>
-            <label htmlFor="type" className="block text-sm font-medium text-zinc-700 mb-1">
+            <label htmlFor="type" className="block text-sm font-medium text-zinc-200 mb-1">
               Tip treninga
             </label>
             <select
               id="type"
               name="type"
               required
-              className="block w-full rounded-lg border border-zinc-300 px-3 py-2.5 text-sm text-zinc-900 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+              className="block w-full rounded-lg border border-zinc-700 bg-zinc-900 text-white px-3 py-2.5 text-sm focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
             >
               <option value="GROUP">Vođeni (max 15 klijenata)</option>
               <option value="PERSONAL">Personalni (1 na 1)</option>
@@ -66,7 +66,7 @@ export default function NewSessionPage() {
           </div>
 
           <div>
-            <label htmlFor="date" className="block text-sm font-medium text-zinc-700 mb-1">
+            <label htmlFor="date" className="block text-sm font-medium text-zinc-200 mb-1">
               Datum
             </label>
             <input
@@ -76,7 +76,7 @@ export default function NewSessionPage() {
               min={TODAY}
               value={date}
               onChange={(e) => handleDateChange(e.target.value)}
-              className="block w-full rounded-lg border border-zinc-300 px-3 py-2.5 text-sm text-zinc-900 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+              className="block w-full rounded-lg border border-zinc-700 bg-zinc-900 text-white px-3 py-2.5 text-sm focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
             />
             {isSunday && (
               <p className="mt-1.5 text-xs text-red-500">Nedeljom ne radimo. Odaberite drugi dan.</p>
@@ -84,7 +84,7 @@ export default function NewSessionPage() {
           </div>
 
           <div>
-            <label htmlFor="time" className="block text-sm font-medium text-zinc-700 mb-1">
+            <label htmlFor="time" className="block text-sm font-medium text-zinc-200 mb-1">
               Vreme
             </label>
             <select
@@ -93,7 +93,7 @@ export default function NewSessionPage() {
               disabled={!date || isSunday || timeSlots.length === 0}
               value={time}
               onChange={(e) => setTime(e.target.value)}
-              className="block w-full rounded-lg border border-zinc-300 px-3 py-2.5 text-sm text-zinc-900 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 disabled:bg-zinc-50 disabled:text-zinc-400"
+              className="block w-full rounded-lg border border-zinc-700 bg-zinc-900 text-white px-3 py-2.5 text-sm focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 disabled:bg-zinc-800 disabled:text-zinc-400"
             >
               <option value="">— Odaberite vreme —</option>
               {timeSlots.map((t) => (

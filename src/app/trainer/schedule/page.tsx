@@ -35,19 +35,19 @@ export default async function TrainerSchedulePage() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-zinc-900">Moj raspored</h1>
+          <h1 className="text-2xl font-bold text-white">Moj raspored</h1>
           <p className="text-sm text-zinc-500 mt-1">{upcoming.length} nadolazećih termina</p>
         </div>
         <Link
           href="/trainer/sessions/new"
-          className="rounded-lg bg-orange-500 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600 transition-colors"
+          className="rounded-lg bg-orange-500 px-4 py-2 text-sm font-semibold text-zinc-950 hover:bg-orange-600 transition-colors"
         >
           + Novi termin
         </Link>
       </div>
 
       {upcoming.length === 0 && past.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-zinc-300 bg-white py-16 text-center">
+        <div className="rounded-xl border border-dashed border-zinc-700 bg-zinc-900 py-16 text-center">
           <p className="text-zinc-500 mb-4">Nemate zakazanih termina.</p>
           <Link
             href="/trainer/sessions/new"
@@ -103,26 +103,26 @@ type SessionCardProps = {
 
 function SessionCard({ session, isPast }: SessionCardProps) {
   return (
-    <div className="rounded-xl border border-zinc-200 bg-white p-5">
+    <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-5">
       <div className="flex items-start justify-between mb-2">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span
               className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
                 session.type === 'GROUP'
-                  ? 'bg-blue-100 text-blue-700'
-                  : 'bg-purple-100 text-purple-700'
+                  ? 'bg-blue-500/15 text-blue-400'
+                  : 'bg-purple-500/15 text-purple-400'
               }`}
             >
               {session.type === 'GROUP' ? 'Vođeni' : 'Personalni'}
             </span>
             {isPast && (
-              <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs text-zinc-500">
+              <span className="rounded-full bg-zinc-800 px-2.5 py-0.5 text-xs text-zinc-300">
                 Završen
               </span>
             )}
           </div>
-          <p className="font-semibold text-zinc-800">{formatDateTime(session.startTime)}</p>
+          <p className="font-semibold text-zinc-100">{formatDateTime(session.startTime)}</p>
         </div>
         <span className="text-sm text-zinc-500">
           {session._count.bookings} / {session.maxCapacity}
@@ -130,15 +130,15 @@ function SessionCard({ session, isPast }: SessionCardProps) {
       </div>
 
       {session.bookings.length > 0 && (
-        <div className="mt-3 pt-3 border-t border-zinc-100">
+        <div className="mt-3 pt-3 border-t border-zinc-700">
           <p className="text-xs font-medium text-zinc-500 mb-2">Klijenti:</p>
           <div className="space-y-1">
             {session.bookings.map((b, i) => (
               <div key={i} className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-xs font-semibold text-orange-600">
+                <div className="w-6 h-6 rounded-full bg-orange-500/15 flex items-center justify-center text-xs font-semibold text-orange-400">
                   {b.client.name[0]}
                 </div>
-                <span className="text-sm text-zinc-700">{b.client.name}</span>
+                <span className="text-sm text-zinc-200">{b.client.name}</span>
                 <span className="text-xs text-zinc-400">{b.client.email}</span>
               </div>
             ))}

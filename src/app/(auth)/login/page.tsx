@@ -10,17 +10,17 @@ export default function LoginPage() {
 
   return (
     <>
-      <h2 className="text-2xl font-bold text-zinc-900 mb-6">Prijava</h2>
+      <h2 className="text-2xl font-bold text-white mb-6">Prijava</h2>
 
       {state?.error && (
-        <div className="mb-4 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-600">
+        <div className="mb-4 rounded-lg bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm text-red-400">
           {state.error}
         </div>
       )}
 
       <form action={action} className="space-y-4">
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-zinc-700 mb-1">
+          <label htmlFor="email" className="block text-sm font-medium text-zinc-200 mb-1">
             Email
           </label>
           <input
@@ -29,13 +29,13 @@ export default function LoginPage() {
             type="email"
             autoComplete="email"
             required
-            className="block w-full rounded-lg border border-zinc-300 px-3 py-2.5 text-sm text-zinc-900 placeholder-zinc-400 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+            className="block w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2.5 text-sm text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
             placeholder="vasa@adresa.com"
           />
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-zinc-700 mb-1">
+          <label htmlFor="password" className="block text-sm font-medium text-zinc-200 mb-1">
             Lozinka
           </label>
           <input
@@ -44,7 +44,7 @@ export default function LoginPage() {
             type="password"
             autoComplete="current-password"
             required
-            className="block w-full rounded-lg border border-zinc-300 px-3 py-2.5 text-sm text-zinc-900 placeholder-zinc-400 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+            className="block w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2.5 text-sm text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
             placeholder="••••••••"
           />
         </div>

@@ -25,12 +25,12 @@ export default async function ClientPackagesPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-zinc-900">Moji paketi</h1>
+        <h1 className="text-2xl font-bold text-white">Moji paketi</h1>
         <p className="text-sm text-zinc-500 mt-1">Pregled vaših aktivnih i neaktivnih paketa</p>
       </div>
 
       {clientPackages.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-zinc-300 bg-white py-16 text-center">
+        <div className="rounded-xl border border-dashed border-zinc-700 bg-zinc-900 py-16 text-center">
           <p className="text-zinc-500">Nemate paketa. Kontaktirajte admin.</p>
         </div>
       ) : (
@@ -87,17 +87,17 @@ function PackageCard({ cp }: PackageCardProps) {
   return (
     <div
       className={`rounded-xl border p-5 ${
-        cp.isActive ? 'border-zinc-200 bg-white shadow-sm' : 'border-dashed border-zinc-200 bg-zinc-50'
+        cp.isActive ? 'border-zinc-800 bg-zinc-900 shadow-sm' : 'border-dashed border-zinc-800 bg-zinc-800/50'
       }`}
     >
       <div className="flex items-start justify-between mb-3">
         <div>
-          <p className="font-semibold text-zinc-900">{cp.package.name}</p>
+          <p className="font-semibold text-white">{cp.package.name}</p>
           <span
             className={`text-xs font-medium rounded-full px-2 py-0.5 ${
               cp.package.type === 'GROUP'
-                ? 'bg-blue-100 text-blue-700'
-                : 'bg-purple-100 text-purple-700'
+                ? 'bg-blue-500/15 text-blue-400'
+                : 'bg-purple-500/15 text-purple-400'
             }`}
           >
             {cp.package.type === 'GROUP' ? 'Vođeni' : 'Personalni'}
@@ -107,11 +107,11 @@ function PackageCard({ cp }: PackageCardProps) {
           )}
         </div>
         {cp.isActive ? (
-          <span className="rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-semibold text-green-700">
+          <span className="rounded-full bg-green-500/15 px-2.5 py-0.5 text-xs font-semibold text-green-400">
             Aktivan
           </span>
         ) : (
-          <span className="rounded-full bg-zinc-200 px-2.5 py-0.5 text-xs font-semibold text-zinc-500">
+          <span className="rounded-full bg-zinc-700 px-2.5 py-0.5 text-xs font-semibold text-zinc-300">
             Čeka aktivaciju
           </span>
         )}
@@ -121,11 +121,11 @@ function PackageCard({ cp }: PackageCardProps) {
         <>
           <div className="flex justify-between text-xs text-zinc-500 mb-1.5">
             <span>Preostalo termina</span>
-            <span className="font-medium text-zinc-800">
+            <span className="font-medium text-zinc-100">
               {cp.remainingSessions} / {cp.package.totalSessions}
             </span>
           </div>
-          <div className="w-full rounded-full bg-zinc-100 h-2">
+          <div className="w-full rounded-full bg-zinc-800 h-2">
             <div
               className="rounded-full bg-orange-400 h-2 transition-all"
               style={{ width: `${pct}%` }}

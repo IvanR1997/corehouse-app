@@ -39,17 +39,17 @@ export function AdminNewSessionForm({ clients }: { clients: Client[] }) {
   return (
     <>
       {state?.error && (
-        <div className="mb-4 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-600">
+        <div className="mb-4 rounded-lg bg-red-500/15 border border-red-200 px-4 py-3 text-sm text-red-400">
           {state.error}
         </div>
       )}
 
-      <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow-sm">
         <form action={action} className="space-y-5">
           <input type="hidden" name="startTime" value={startTime} />
 
           <div>
-            <label htmlFor="type" className="block text-sm font-medium text-zinc-700 mb-1">
+            <label htmlFor="type" className="block text-sm font-medium text-zinc-200 mb-1">
               Tip treninga
             </label>
             <select
@@ -58,7 +58,7 @@ export function AdminNewSessionForm({ clients }: { clients: Client[] }) {
               required
               value={type}
               onChange={(e) => setType(e.target.value as 'PERSONAL' | 'GROUP')}
-              className="block w-full rounded-lg border border-zinc-300 px-3 py-2.5 text-sm text-zinc-900 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+              className="block w-full rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
             >
               <option value="PERSONAL">Personalni (1 na 1)</option>
               <option value="GROUP">Vođeni (max 15 klijenata)</option>
@@ -67,13 +67,13 @@ export function AdminNewSessionForm({ clients }: { clients: Client[] }) {
 
           {type === 'PERSONAL' && (
             <div>
-              <label htmlFor="clientId" className="block text-sm font-medium text-zinc-700 mb-1">
+              <label htmlFor="clientId" className="block text-sm font-medium text-zinc-200 mb-1">
                 Klijent
               </label>
               <select
                 id="clientId"
                 name="clientId"
-                className="block w-full rounded-lg border border-zinc-300 px-3 py-2.5 text-sm text-zinc-900 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+                className="block w-full rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
               >
                 <option value="">— Bez dodele klijentu —</option>
                 {clients.map((c) => (
@@ -86,7 +86,7 @@ export function AdminNewSessionForm({ clients }: { clients: Client[] }) {
           )}
 
           <div>
-            <label htmlFor="date" className="block text-sm font-medium text-zinc-700 mb-1">
+            <label htmlFor="date" className="block text-sm font-medium text-zinc-200 mb-1">
               Datum
             </label>
             <input
@@ -96,7 +96,7 @@ export function AdminNewSessionForm({ clients }: { clients: Client[] }) {
               min={TODAY}
               value={date}
               onChange={(e) => handleDateChange(e.target.value)}
-              className="block w-full rounded-lg border border-zinc-300 px-3 py-2.5 text-sm text-zinc-900 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+              className="block w-full rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
             />
             {isSunday && (
               <p className="mt-1.5 text-xs text-red-500">Nedeljom ne radimo. Odaberite drugi dan.</p>
@@ -104,7 +104,7 @@ export function AdminNewSessionForm({ clients }: { clients: Client[] }) {
           </div>
 
           <div>
-            <label htmlFor="time" className="block text-sm font-medium text-zinc-700 mb-1">
+            <label htmlFor="time" className="block text-sm font-medium text-zinc-200 mb-1">
               Vreme
             </label>
             <select
@@ -113,7 +113,7 @@ export function AdminNewSessionForm({ clients }: { clients: Client[] }) {
               disabled={!date || isSunday || timeSlots.length === 0}
               value={time}
               onChange={(e) => setTime(e.target.value)}
-              className="block w-full rounded-lg border border-zinc-300 px-3 py-2.5 text-sm text-zinc-900 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 disabled:bg-zinc-50 disabled:text-zinc-400"
+              className="block w-full rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 disabled:bg-zinc-950 disabled:text-zinc-500"
             >
               <option value="">— Odaberite vreme —</option>
               {timeSlots.map((t) => (
@@ -121,7 +121,7 @@ export function AdminNewSessionForm({ clients }: { clients: Client[] }) {
               ))}
             </select>
             {date && !isSunday && (
-              <p className="mt-1.5 text-xs text-zinc-400">
+              <p className="mt-1.5 text-xs text-zinc-500">
                 {new Date(date + 'T00:00:00').getDay() === 6
                   ? 'Subota: 10:00 – 17:00'
                   : 'Pon–Pet: 08:00 – 21:00'}

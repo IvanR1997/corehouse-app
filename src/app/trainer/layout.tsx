@@ -5,7 +5,7 @@ export default async function TrainerLayout({ children }: { children: React.Reac
   const user = await requireRole('TRAINER')
 
   return (
-    <div className="min-h-screen bg-zinc-50">
+    <div className="min-h-screen bg-zinc-950">
       <Navbar userName={user.name} role="TRAINER" />
       <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
     </div>

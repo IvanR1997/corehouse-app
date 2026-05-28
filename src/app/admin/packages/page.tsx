@@ -18,8 +18,8 @@ export default async function AdminPackagesPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-zinc-900">Paketi</h1>
-        <p className="text-sm text-zinc-500 mt-1">Upravljanje paketima treninga</p>
+        <h1 className="text-2xl font-bold text-white">Paketi</h1>
+        <p className="text-sm text-zinc-400 mt-1">Upravljanje paketima treninga</p>
       </div>
 
       <div className="space-y-8">
@@ -30,36 +30,36 @@ export default async function AdminPackagesPage() {
           ] as const
         ).map(({ key, label }) => (
           <section key={key}>
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-400 mb-3">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500 mb-3">
               {label}
             </h2>
 
             {grouped[key].length === 0 ? (
-              <div className="rounded-xl border border-dashed border-zinc-300 bg-white py-8 text-center">
-                <p className="text-sm text-zinc-500">Nema paketa.</p>
+              <div className="rounded-xl border border-dashed border-zinc-700 bg-zinc-900 py-8 text-center">
+                <p className="text-sm text-zinc-400">Nema paketa.</p>
               </div>
             ) : (
-              <div className="rounded-xl border border-zinc-200 bg-white shadow-sm overflow-hidden">
+              <div className="rounded-xl border border-zinc-800 bg-zinc-900 shadow-sm overflow-hidden">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b border-zinc-100 bg-zinc-50">
-                      <th className="px-5 py-3 text-left font-semibold text-zinc-500">Naziv</th>
-                      <th className="px-5 py-3 text-left font-semibold text-zinc-500">Treninga</th>
-                      <th className="px-5 py-3 text-left font-semibold text-zinc-500">Opis</th>
-                      <th className="px-5 py-3 text-left font-semibold text-zinc-500">Dodeljeno</th>
+                    <tr className="border-b border-zinc-700 bg-zinc-800/50">
+                      <th className="px-5 py-3 text-left font-semibold text-zinc-400">Naziv</th>
+                      <th className="px-5 py-3 text-left font-semibold text-zinc-400">Treninga</th>
+                      <th className="px-5 py-3 text-left font-semibold text-zinc-400">Opis</th>
+                      <th className="px-5 py-3 text-left font-semibold text-zinc-400">Dodeljeno</th>
                       <th className="px-5 py-3" />
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-zinc-100">
+                  <tbody className="divide-y divide-zinc-800">
                     {grouped[key].map((pkg) => (
-                      <tr key={pkg.id} className="hover:bg-zinc-50/50 transition-colors">
-                        <td className="px-5 py-4 font-medium text-zinc-900">{pkg.name}</td>
-                        <td className="px-5 py-4 text-zinc-600">{pkg.totalSessions}</td>
-                        <td className="px-5 py-4 text-zinc-400 text-xs">
+                      <tr key={pkg.id} className="hover:bg-zinc-800/30 transition-colors">
+                        <td className="px-5 py-4 font-medium text-white">{pkg.name}</td>
+                        <td className="px-5 py-4 text-zinc-300">{pkg.totalSessions}</td>
+                        <td className="px-5 py-4 text-zinc-500 text-xs">
                           {pkg.description ?? '—'}
                         </td>
                         <td className="px-5 py-4">
-                          <span className={`text-xs font-medium ${pkg._count.clientPackages > 0 ? 'text-zinc-700' : 'text-zinc-400'}`}>
+                          <span className={`text-xs font-medium ${pkg._count.clientPackages > 0 ? 'text-zinc-200' : 'text-zinc-500'}`}>
                             {pkg._count.clientPackages} klijenata
                           </span>
                         </td>

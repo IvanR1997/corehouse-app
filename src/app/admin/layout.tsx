@@ -7,7 +7,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const notificationCount = await db.adminNotification.count({ where: { isRead: false } })
 
   return (
-    <div className="min-h-screen bg-zinc-50">
+    <div className="min-h-screen bg-zinc-950">
       <Navbar userName={user.name} role="ADMIN" notificationCount={notificationCount} />
       <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
     </div>

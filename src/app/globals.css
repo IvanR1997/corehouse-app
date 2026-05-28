@@ -1,8 +1,18 @@
 @import "tailwindcss";
 
+@theme {
+  --color-orange-50: rgba(238, 238, 34, 0.05);
+  --color-orange-100: rgba(238, 238, 34, 0.12);
+  --color-orange-200: rgba(238, 238, 34, 0.25);
+  --color-orange-300: rgba(238, 238, 34, 0.45);
+  --color-orange-400: #f0f040;
+  --color-orange-500: #eeee22;
+  --color-orange-600: #cccc00;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #18181b;
+  --background: #09090b;
+  --foreground: #fafafa;
 }
 
 body {

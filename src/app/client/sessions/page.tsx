@@ -25,10 +25,10 @@ function PackageBanner({
 
   if (remaining === 1) {
     return (
-      <div className="rounded-xl border border-red-200 bg-red-50 px-5 py-4 flex items-center justify-between">
+      <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-5 py-4 flex items-center justify-between">
         <div>
-          <p className="text-sm font-semibold text-red-700">{name}</p>
-          <p className="text-xs text-red-600 mt-0.5">
+          <p className="text-sm font-semibold text-red-400">{name}</p>
+          <p className="text-xs text-red-400 mt-0.5">
             Imate još <strong>1 termin</strong> — kontaktirajte nas za produženje paketa.
           </p>
           {expiryText && <p className="text-xs text-red-400 mt-0.5">{expiryText}</p>}
@@ -40,16 +40,16 @@ function PackageBanner({
 
   if (remaining <= 5) {
     return (
-      <div className="rounded-xl border border-amber-200 bg-amber-50 px-5 py-4 flex items-center justify-between gap-4">
+      <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-5 py-4 flex items-center justify-between gap-4">
         <div className="flex-1">
           <div className="flex items-center justify-between mb-1.5">
-            <p className="text-sm font-semibold text-amber-800">{name}</p>
+            <p className="text-sm font-semibold text-amber-400">{name}</p>
             <div className="text-right">
-              <span className="text-sm font-bold text-amber-700">{remaining} preostalih</span>
-              {expiryText && <p className="text-xs text-amber-500">{expiryText}</p>}
+              <span className="text-sm font-bold text-amber-400">{remaining} preostalih</span>
+              {expiryText && <p className="text-xs text-amber-400">{expiryText}</p>}
             </div>
           </div>
-          <div className="w-full rounded-full bg-amber-100 h-1.5">
+          <div className="w-full rounded-full bg-amber-500/15 h-1.5">
             <div className="rounded-full bg-amber-400 h-1.5" style={{ width: `${pct}%` }} />
           </div>
         </div>
@@ -58,16 +58,16 @@ function PackageBanner({
   }
 
   return (
-    <div className="rounded-xl border border-zinc-200 bg-white px-5 py-4 flex items-center justify-between gap-4">
+    <div className="rounded-xl border border-zinc-800 bg-zinc-900 px-5 py-4 flex items-center justify-between gap-4">
       <div className="flex-1">
         <div className="flex items-center justify-between mb-1.5">
-          <p className="text-sm font-semibold text-zinc-800">{name}</p>
+          <p className="text-sm font-semibold text-zinc-100">{name}</p>
           <div className="text-right">
-            <span className="text-sm font-medium text-zinc-600">{remaining} / {total}</span>
+            <span className="text-sm font-medium text-zinc-300">{remaining} / {total}</span>
             {expiryText && <p className="text-xs text-zinc-400">{expiryText}</p>}
           </div>
         </div>
-        <div className="w-full rounded-full bg-zinc-100 h-1.5">
+        <div className="w-full rounded-full bg-zinc-800 h-1.5">
           <div className="rounded-full bg-orange-400 h-1.5" style={{ width: `${pct}%` }} />
         </div>
       </div>
@@ -133,7 +133,7 @@ export default async function ClientSessionsPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-zinc-900">Dostupni termini</h1>
+        <h1 className="text-2xl font-bold text-white">Dostupni termini</h1>
         <p className="text-sm text-zinc-500 mt-1">
           Izaberite tip treninga, pa datum i termin
         </p>
