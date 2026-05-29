@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import logo from '../../../public/logo.jpg'
+import { logout } from '@/app/actions/auth'
 
 type Props = {
   userName: string
@@ -95,6 +96,15 @@ export function Sidebar({ role, notificationCount = 0 }: Props) {
             </Link>
           )
         })}
+        <form action={logout} className="flex-1 flex">
+          <button
+            type="submit"
+            className="flex-1 flex flex-col items-center justify-center py-3 gap-1 text-xs font-medium text-zinc-500"
+          >
+            <LogoutIcon />
+            <span>Odjava</span>
+          </button>
+        </form>
       </nav>
     </>
   )
@@ -158,6 +168,16 @@ function PlusIcon() {
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <line x1="12" y1="5" x2="12" y2="19" />
       <line x1="5" y1="12" x2="19" y2="12" />
+    </svg>
+  )
+}
+
+function LogoutIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+      <polyline points="16 17 21 12 16 7" />
+      <line x1="21" y1="12" x2="9" y2="12" />
     </svg>
   )
 }
