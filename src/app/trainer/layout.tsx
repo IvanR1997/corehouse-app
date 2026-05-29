@@ -1,6 +1,7 @@
 import { requireRole } from '@/lib/dal'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { TopBar } from '@/components/layout/TopBar'
+import { MobileHeader } from '@/components/layout/MobileHeader'
 
 export default async function TrainerLayout({ children }: { children: React.ReactNode }) {
   const user = await requireRole('TRAINER')
@@ -9,6 +10,7 @@ export default async function TrainerLayout({ children }: { children: React.Reac
     <div className="flex min-h-screen bg-zinc-950">
       <Sidebar userName={user.name} role="TRAINER" />
       <main className="flex-1 px-4 md:px-6 py-6 pb-24 md:pb-8 overflow-auto">
+        <MobileHeader />
         <TopBar userName={user.name} role="TRAINER" />
         {children}
       </main>
