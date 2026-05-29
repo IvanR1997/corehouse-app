@@ -46,15 +46,17 @@ export function SessionsDayAccordion({ groups }: { groups: DayGroup[] }) {
             {/* Day header */}
             <button
               onClick={() => toggle(group.dateKey)}
-              className="w-full flex items-center justify-between px-5 py-4 hover:bg-zinc-800/50 transition-colors text-left"
+              className="w-full flex items-center justify-between px-3 md:px-5 py-4 hover:bg-zinc-800/50 transition-colors text-left"
             >
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
                 <span className="font-semibold text-white capitalize">{group.label}</span>
-                <span className="text-xs text-zinc-500">
-                  {group.sessions.length} {group.sessions.length === 1 ? 'termin' : 'termina'}
-                </span>
-                <span className="text-xs text-zinc-600">·</span>
-                <span className="text-xs text-zinc-500">{totalBookings}/{totalCapacity} mesta</span>
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <span className="text-xs text-zinc-500">
+                    {group.sessions.length} {group.sessions.length === 1 ? 'termin' : 'termina'}
+                  </span>
+                  <span className="text-xs text-zinc-600">·</span>
+                  <span className="text-xs text-zinc-500">{totalBookings}/{totalCapacity} mesta</span>
+                </div>
               </div>
               <span className={`text-zinc-500 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
                 ▾
@@ -63,8 +65,8 @@ export function SessionsDayAccordion({ groups }: { groups: DayGroup[] }) {
 
             {/* Sessions */}
             {isOpen && (
-              <div className="border-t border-zinc-700 px-5 py-4">
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div className="border-t border-zinc-700 px-3 md:px-5 py-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
                   {group.sessions.map((session) => {
                     const isFull = session.bookingCount >= session.maxCapacity
                     const fillPct = Math.round((session.bookingCount / session.maxCapacity) * 100)

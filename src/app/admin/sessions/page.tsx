@@ -55,16 +55,16 @@ export default async function AdminSessionsPage() {
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white">Svi termini</h1>
+          <h1 className="text-xl md:text-2xl font-bold text-white">Svi termini</h1>
           <p className="text-sm text-zinc-400 mt-1">
             {upcoming.length} nadolazećih · {past.length} prošlih
           </p>
         </div>
         <Link
           href="/admin/sessions/new"
-          className="rounded-lg bg-orange-500 px-4 py-2 text-sm font-semibold text-zinc-950 hover:bg-orange-600 transition-colors"
+          className="rounded-lg bg-orange-500 px-4 py-2 text-sm font-semibold text-zinc-950 hover:bg-orange-600 transition-colors self-start sm:self-auto"
         >
           + Novi termin
         </Link>
@@ -95,24 +95,24 @@ export default async function AdminSessionsPage() {
                   <tbody className="divide-y divide-zinc-800">
                     {past.map((session) => (
                       <tr key={session.id} className="opacity-50 hover:opacity-70 transition-opacity">
-                        <td className="px-5 py-3 font-medium text-zinc-200 whitespace-nowrap">
+                        <td className="px-3 md:px-5 py-3 font-medium text-zinc-200 whitespace-nowrap">
                           {new Intl.DateTimeFormat('sr-RS', { hour: '2-digit', minute: '2-digit' }).format(new Date(session.startTime))}
                           <span className="ml-2 text-xs font-normal text-zinc-500">
                             {new Intl.DateTimeFormat('sr-RS', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(session.startTime))}
                           </span>
                         </td>
-                        <td className="px-5 py-3">
+                        <td className="px-3 md:px-5 py-3 hidden md:table-cell">
                           <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
                             session.type === 'GROUP' ? 'bg-blue-500/15 text-blue-400' : 'bg-purple-500/15 text-purple-400'
                           }`}>
                             {session.type === 'GROUP' ? 'Vođeni' : 'Personalni'}
                           </span>
                         </td>
-                        <td className="px-5 py-3 text-zinc-500 text-xs">{session.trainer?.name ?? '—'}</td>
-                        <td className="px-5 py-3 text-xs text-zinc-500">
+                        <td className="px-3 md:px-5 py-3 text-zinc-500 text-xs hidden md:table-cell">{session.trainer?.name ?? '—'}</td>
+                        <td className="px-3 md:px-5 py-3 text-xs text-zinc-500 hidden md:table-cell">
                           {session._count.bookings}/{session.maxCapacity}
                         </td>
-                        <td className="px-5 py-3 text-right">
+                        <td className="px-3 md:px-5 py-3 text-right">
                           <DeleteSessionButton sessionId={session.id} bookingCount={session._count.bookings} />
                         </td>
                       </tr>

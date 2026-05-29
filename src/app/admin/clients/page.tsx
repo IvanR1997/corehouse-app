@@ -46,7 +46,7 @@ export default async function AdminClientsPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white">Klijenti</h1>
+        <h1 className="text-xl md:text-2xl font-bold text-white">Klijenti</h1>
         <p className="text-sm text-zinc-400 mt-1">{clients.length} registrovanih klijenata</p>
       </div>
 
@@ -59,13 +59,12 @@ export default async function AdminClientsPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-zinc-700 bg-zinc-800/50">
-                <th className="px-5 py-3 text-left font-semibold text-zinc-400">Klijent</th>
-                <th className="px-5 py-3 text-left font-semibold text-zinc-400">Email</th>
-                <th className="px-5 py-3 text-left font-semibold text-zinc-400 whitespace-nowrap">Aktivan paket</th>
-                <th className="px-5 py-3 text-left font-semibold text-zinc-400">Iskorišćeno</th>
-                <th className="px-5 py-3 text-left font-semibold text-zinc-400">Uplata</th>
-                <th className="px-5 py-3 text-left font-semibold text-zinc-400">Ističe</th>
-                <th className="px-5 py-3 text-right font-semibold text-zinc-400">Akcija</th>
+                <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400">Klijent</th>
+                <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400 whitespace-nowrap hidden md:table-cell">Aktivan paket</th>
+                <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400 hidden md:table-cell">Iskorišćeno</th>
+                <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400 hidden md:table-cell">Uplata</th>
+                <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400 hidden md:table-cell">Ističe</th>
+                <th className="px-3 md:px-5 py-3 text-right font-semibold text-zinc-400">Akcija</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-800">
@@ -75,7 +74,7 @@ export default async function AdminClientsPage() {
 
                 return (
                   <tr key={client.id} className="hover:bg-zinc-800/30 transition-colors">
-                    <td className="px-5 py-4">
+                    <td className="px-3 md:px-5 py-4">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-orange-500/15 flex items-center justify-center text-sm font-semibold text-orange-400">
                           {client.name[0]}
@@ -83,10 +82,9 @@ export default async function AdminClientsPage() {
                         <span className="font-medium text-white whitespace-nowrap">{client.name}</span>
                       </div>
                     </td>
-                    <td className="px-5 py-4 text-zinc-400">{client.email}</td>
 
                     {/* Aktivan paket */}
-                    <td className="px-5 py-4">
+                    <td className="px-3 md:px-5 py-4 hidden md:table-cell">
                       {activePackages.length === 0 ? (
                         <span className="text-xs text-zinc-500">
                           {hasInactive ? 'čeka aktivaciju' : 'bez paketa'}
@@ -110,7 +108,7 @@ export default async function AdminClientsPage() {
                     </td>
 
                     {/* Iskorišćeno */}
-                    <td className="px-5 py-4">
+                    <td className="px-3 md:px-5 py-4 hidden md:table-cell">
                       {activePackages.length === 0 ? (
                         <span className="text-xs text-zinc-600">—</span>
                       ) : (
@@ -137,7 +135,7 @@ export default async function AdminClientsPage() {
                     </td>
 
                     {/* Uplata */}
-                    <td className="px-5 py-4">
+                    <td className="px-3 md:px-5 py-4 hidden md:table-cell">
                       {activePackages.length === 0 ? (
                         <span className="text-xs text-zinc-600">—</span>
                       ) : (
@@ -152,7 +150,7 @@ export default async function AdminClientsPage() {
                     </td>
 
                     {/* Ističe */}
-                    <td className="px-5 py-4">
+                    <td className="px-3 md:px-5 py-4 hidden md:table-cell">
                       {activePackages.length === 0 ? (
                         <span className="text-xs text-zinc-600">—</span>
                       ) : (
@@ -169,7 +167,7 @@ export default async function AdminClientsPage() {
                       )}
                     </td>
 
-                    <td className="px-5 py-4 text-right">
+                    <td className="px-3 md:px-5 py-4 text-right">
                       <Link
                         href={`/admin/clients/${client.id}/activate`}
                         className="rounded-md bg-orange-500/10 border border-orange-500/30 px-3 py-1.5 text-xs font-medium text-orange-400 hover:bg-orange-500/15 transition-colors"

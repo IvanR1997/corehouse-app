@@ -116,7 +116,7 @@ export function AssignPackageForm({ userId, groupPackages, personalPackages }: A
               ))}
             </select>
           </div>
-          <SubmitButton pendingText="Dodijeljujem...">Dodijeli</SubmitButton>
+          <SubmitButton pendingText="Dodeljujem...">Dodeli</SubmitButton>
         </form>
       )}
     </div>

@@ -18,7 +18,7 @@ export default async function AdminPackagesPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white">Paketi</h1>
+        <h1 className="text-xl md:text-2xl font-bold text-white">Paketi</h1>
         <p className="text-sm text-zinc-400 mt-1">Upravljanje paketima treninga</p>
       </div>
 
@@ -43,27 +43,27 @@ export default async function AdminPackagesPage() {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-zinc-700 bg-zinc-800/50">
-                      <th className="px-5 py-3 text-left font-semibold text-zinc-400">Naziv</th>
-                      <th className="px-5 py-3 text-left font-semibold text-zinc-400">Treninga</th>
-                      <th className="px-5 py-3 text-left font-semibold text-zinc-400">Opis</th>
-                      <th className="px-5 py-3 text-left font-semibold text-zinc-400">Dodeljeno</th>
-                      <th className="px-5 py-3" />
+                      <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400">Naziv</th>
+                      <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400">Treninga</th>
+                      <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400 hidden md:table-cell">Opis</th>
+                      <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400 hidden md:table-cell">Dodeljeno</th>
+                      <th className="px-3 md:px-5 py-3" />
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-zinc-800">
                     {grouped[key].map((pkg) => (
                       <tr key={pkg.id} className="hover:bg-zinc-800/30 transition-colors">
-                        <td className="px-5 py-4 font-medium text-white">{pkg.name}</td>
-                        <td className="px-5 py-4 text-zinc-300">{pkg.totalSessions}</td>
-                        <td className="px-5 py-4 text-zinc-500 text-xs">
+                        <td className="px-3 md:px-5 py-4 font-medium text-white">{pkg.name}</td>
+                        <td className="px-3 md:px-5 py-4 text-zinc-300">{pkg.totalSessions}</td>
+                        <td className="px-3 md:px-5 py-4 text-zinc-500 text-xs hidden md:table-cell">
                           {pkg.description ?? '—'}
                         </td>
-                        <td className="px-5 py-4">
+                        <td className="px-3 md:px-5 py-4 hidden md:table-cell">
                           <span className={`text-xs font-medium ${pkg._count.clientPackages > 0 ? 'text-zinc-200' : 'text-zinc-500'}`}>
                             {pkg._count.clientPackages} klijenata
                           </span>
                         </td>
-                        <td className="px-5 py-4 text-right">
+                        <td className="px-3 md:px-5 py-4 text-right">
                           <DeletePackageButton
                             packageId={pkg.id}
                             assignedCount={pkg._count.clientPackages}

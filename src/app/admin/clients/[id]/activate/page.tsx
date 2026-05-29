@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { db } from '@/lib/db'
 import { requireRole } from '@/lib/dal'
 import { ActivatePackageButton, AssignPackageForm, RemovePackageButton } from './PackageActions'
+import { DeleteClientButton } from './DeleteClientButton'
 
 function formatDate(date: Date | null) {
   if (!date) return '—'
@@ -39,19 +40,22 @@ export default async function ActivateClientPackagePage({
   const personalPackages = packages.filter((p) => p.type === 'PERSONAL')
 
   return (
-    <div className="max-w-2xl">
-      <div className="mb-6">
-        <a href="/admin/clients" className="text-sm text-orange-500 hover:underline">
-          ← Nazad na klijente
-        </a>
-        <h1 className="text-2xl font-bold text-white mt-2">Paketi za {client.name}</h1>
-        <p className="text-sm text-zinc-400">{client.email}</p>
+    <div>
+      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+        <div>
+          <a href="/admin/clients" className="text-sm text-orange-500 hover:underline">
+            ← Nazad na klijente
+          </a>
+          <h1 className="text-xl md:text-2xl font-bold text-white mt-1">Paketi za {client.name}</h1>
+          <p className="text-sm text-zinc-400">{client.email}</p>
+        </div>
+        <DeleteClientButton clientId={client.id} />
       </div>
 
-      <div className="space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <section>
           <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500 mb-3">
-            Dodijeli novi paket
+            Dodeli novi paket
           </h2>
           <AssignPackageForm
             userId={client.id}
@@ -116,3 +120,4 @@ export default async function ActivateClientPackagePage({
     </div>
   )
 }
+
