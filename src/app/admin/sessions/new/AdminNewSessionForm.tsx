@@ -29,7 +29,7 @@ export function AdminNewSessionForm({ clients }: { clients: Client[] }) {
 
   const timeSlots = useMemo(() => getTimeSlots(date), [date])
   const isSunday = date ? new Date(date + 'T00:00:00').getDay() === 0 : false
-  const startTime = date && time ? `${date}T${time}` : ''
+  const startTime = date && time ? new Date(`${date}T${time}`).toISOString() : ''
 
   const handleDateChange = (val: string) => {
     setDate(val)
