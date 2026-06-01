@@ -20,6 +20,8 @@ type Props = {
   sessions: SessionData[]
   hasGroupPackage: boolean
   hasPersonalPackage: boolean
+  groupPackageExpiry: string | null
+  personalPackageExpiry: string | null
 }
 
 const DAYS = ['Pon', 'Uto', 'Sre', 'Čet', 'Pet', 'Sub', 'Ned']
@@ -69,10 +71,12 @@ function Calendar({
   sessions,
   sessionType,
   hasPackage,
+  packageExpiry,
 }: {
   sessions: SessionData[]
   sessionType: 'GROUP' | 'PERSONAL'
   hasPackage: boolean
+  packageExpiry: string | null
 }) {
   const today = useMemo(() => {
     const d = new Date()
@@ -167,7 +171,8 @@ function Calendar({
             dayStart.setHours(0, 0, 0, 0)
             const isSunday = day.getDay() === 0
             const isPast = dayStart < today
-            const isClickable = !isPast && !isSunday
+            const isExpired = packageExpiry ? dayStart >= new Date(packageExpiry) : false
+            const isClickable = !isPast && !isSunday && !isExpired
             const isToday = isSameDay(day, new Date())
             const isSelected = selectedDate ? isSameDay(day, selectedDate) : false
             const hasSessions = sessionsByDate.has(toDateKey(day))
@@ -278,7 +283,7 @@ function Calendar({
   )
 }
 
-export function SessionsCalendar({ sessions, hasGroupPackage, hasPersonalPackage }: Props) {
+export function SessionsCalendar({ sessions, hasGroupPackage, hasPersonalPackage, groupPackageExpiry, personalPackageExpiry }: Props) {
   const [activeTab, setActiveTab] = useState<'GROUP' | 'PERSONAL'>(
     hasGroupPackage ? 'GROUP' : 'PERSONAL'
   )
@@ -314,9 +319,9 @@ export function SessionsCalendar({ sessions, hasGroupPackage, hasPersonalPackage
       </div>
 
       {activeTab === 'GROUP' ? (
-        <Calendar key="group" sessions={groupSessions} sessionType="GROUP" hasPackage={hasGroupPackage} />
+        <Calendar key="group" sessions={groupSessions} sessionType="GROUP" hasPackage={hasGroupPackage} packageExpiry={groupPackageExpiry} />
       ) : (
-        <Calendar key="personal" sessions={personalSessions} sessionType="PERSONAL" hasPackage={hasPersonalPackage} />
+        <Calendar key="personal" sessions={personalSessions} sessionType="PERSONAL" hasPackage={hasPersonalPackage} packageExpiry={personalPackageExpiry} />
       )}
     </div>
   )

@@ -45,6 +45,13 @@ export async function createBooking(sessionId: string): Promise<BookingState> {
     }
   }
 
+  if (clientPackage.activatedAt) {
+    const expiresAt = packageExpiry(clientPackage.activatedAt)
+    if (session.startTime >= expiresAt) {
+      return { error: `Vaš paket ističe ${expiresAt.toLocaleDateString('sr-RS')} i ne važi za ovaj termin.` }
+    }
+  }
+
   if (session._count.bookings >= session.maxCapacity) return { error: 'Termin je popunjen.' }
 
   const existing = await db.booking.findFirst({
@@ -87,6 +94,13 @@ export async function bookSlot(
 
   if (!clientPackage)
     return { error: `Nemate aktivan ${type === 'GROUP' ? 'vođeni' : 'personalni'} paket sa preostalim terminima.` }
+
+  if (clientPackage.activatedAt) {
+    const expiresAt = packageExpiry(clientPackage.activatedAt)
+    if (startDate >= expiresAt) {
+      return { error: `Vaš paket ističe ${expiresAt.toLocaleDateString('sr-RS')} i ne važi za ovaj termin.` }
+    }
+  }
 
   const maxCapacity = type === 'GROUP' ? 15 : 1
 

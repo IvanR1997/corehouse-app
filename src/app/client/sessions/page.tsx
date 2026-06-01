@@ -109,6 +109,16 @@ export default async function ClientSessionsPage() {
   const hasPersonalPackage = activePackages.some((p) => p.package.type === 'PERSONAL')
   const hasGroupPackage = activePackages.some((p) => p.package.type === 'GROUP')
 
+  const getExpiry = (type: string) => {
+    const pkg = activePackages.find((p) => p.package.type === type && p.activatedAt)
+    if (!pkg?.activatedAt) return null
+    const d = new Date(pkg.activatedAt)
+    d.setMonth(d.getMonth() + 1)
+    return d.toISOString()
+  }
+  const groupPackageExpiry = getExpiry('GROUP')
+  const personalPackageExpiry = getExpiry('PERSONAL')
+
   const sessionData: SessionData[] = sessions.map((session) => {
     const isBooked = bookedSessionIds.has(session.id)
     const isFull = session._count.bookings >= session.maxCapacity
@@ -157,6 +167,8 @@ export default async function ClientSessionsPage() {
         sessions={sessionData}
         hasGroupPackage={hasGroupPackage}
         hasPersonalPackage={hasPersonalPackage}
+        groupPackageExpiry={groupPackageExpiry}
+        personalPackageExpiry={personalPackageExpiry}
       />
     </div>
   )
