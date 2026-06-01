@@ -10,6 +10,7 @@ function formatDateTime(date: Date) {
     year: 'numeric',
     hour: '2-digit',
     minute: '2-digit',
+    timeZone: 'Europe/Belgrade',
   }).format(new Date(date))
 }
 

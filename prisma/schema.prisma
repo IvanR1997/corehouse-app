@@ -15,9 +15,10 @@ model User {
   role      Role     @default(CLIENT)
   createdAt DateTime @default(now())
 
-  packages       ClientPackage[]
+  packages        ClientPackage[]
   bookings        Booking[]
-  trainedSessions Session[]       @relation("TrainerSessions")
+  trainedSessions Session[]        @relation("TrainerSessions")
+  packageRequests PackageRequest[]
 }
 
 model Package {
@@ -26,8 +27,22 @@ model Package {
   description   String?
   type          PackageType
   totalSessions Int
+  price         Float?
 
-  clientPackages ClientPackage[]
+  clientPackages  ClientPackage[]
+  packageRequests PackageRequest[]
+}
+
+model PackageRequest {
+  id        String               @id @default(cuid())
+  userId    String
+  packageId String
+  status    PackageRequestStatus @default(PENDING)
+  note      String?
+  createdAt DateTime             @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  package Package @relation(fields: [packageId], references: [id])
 }
 
 model ClientPackage {
@@ -85,4 +100,10 @@ enum Role {
 enum PackageType {
   PERSONAL
   GROUP
+}
+
+enum PackageRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }

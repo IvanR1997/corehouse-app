@@ -1,6 +1,7 @@
 import { db } from '@/lib/db'
 import { requireRole } from '@/lib/dal'
 import { DeletePackageButton } from './DeletePackageButton'
+import { CreatePackageForm } from './CreatePackageForm'
 
 export default async function AdminPackagesPage() {
   await requireRole('ADMIN')
@@ -17,9 +18,12 @@ export default async function AdminPackagesPage() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-xl md:text-2xl font-bold text-white">Paketi</h1>
-        <p className="text-sm text-zinc-400 mt-1">Upravljanje paketima treninga</p>
+      <div className="mb-6 flex items-center justify-between gap-4">
+        <div>
+          <h1 className="text-xl md:text-2xl font-bold text-white">Paketi</h1>
+          <p className="text-sm text-zinc-400 mt-1">Upravljanje paketima treninga</p>
+        </div>
+        <CreatePackageForm />
       </div>
 
       <div className="space-y-8">
@@ -45,6 +49,7 @@ export default async function AdminPackagesPage() {
                     <tr className="border-b border-zinc-700 bg-zinc-800/50">
                       <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400">Naziv</th>
                       <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400">Treninga</th>
+                      <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400">Cena</th>
                       <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400 hidden md:table-cell">Opis</th>
                       <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400 hidden md:table-cell">Dodeljeno</th>
                       <th className="px-3 md:px-5 py-3" />
@@ -55,6 +60,9 @@ export default async function AdminPackagesPage() {
                       <tr key={pkg.id} className="hover:bg-zinc-800/30 transition-colors">
                         <td className="px-3 md:px-5 py-4 font-medium text-white">{pkg.name}</td>
                         <td className="px-3 md:px-5 py-4 text-zinc-300">{pkg.totalSessions}</td>
+                        <td className="px-3 md:px-5 py-4 text-zinc-300 font-medium whitespace-nowrap">
+                          {pkg.price ? `${pkg.price.toLocaleString('sr-RS')} RSD` : <span className="text-zinc-600">—</span>}
+                        </td>
                         <td className="px-3 md:px-5 py-4 text-zinc-500 text-xs hidden md:table-cell">
                           {pkg.description ?? '—'}
                         </td>

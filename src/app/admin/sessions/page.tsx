@@ -14,7 +14,7 @@ function formatDayLabel(date: Date) {
 }
 
 function toDateKey(date: Date) {
-  return new Date(date).toISOString().slice(0, 10)
+  return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Belgrade' }).format(new Date(date))
 }
 
 export default async function AdminSessionsPage() {
@@ -23,6 +23,10 @@ export default async function AdminSessionsPage() {
   const sessions = await db.session.findMany({
     include: {
       trainer: { select: { name: true } },
+      bookings: {
+        where: { cancelledAt: null },
+        include: { client: { select: { name: true } } },
+      },
       _count: { select: { bookings: true } },
     },
     orderBy: { startTime: 'asc' },
@@ -50,6 +54,7 @@ export default async function AdminSessionsPage() {
       maxCapacity: s.maxCapacity,
       bookingCount: s._count.bookings,
       trainerName: s.trainer?.name ?? null,
+      clientNames: s.bookings.map((b) => b.client.name),
     })),
   }))
 
@@ -96,7 +101,7 @@ export default async function AdminSessionsPage() {
                     {past.map((session) => (
                       <tr key={session.id} className="opacity-50 hover:opacity-70 transition-opacity">
                         <td className="px-3 md:px-5 py-3 font-medium text-zinc-200 whitespace-nowrap">
-                          {new Intl.DateTimeFormat('sr-RS', { hour: '2-digit', minute: '2-digit' }).format(new Date(session.startTime))}
+                          {new Intl.DateTimeFormat('sr-RS', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Belgrade' }).format(new Date(session.startTime))}
                           <span className="ml-2 text-xs font-normal text-zinc-500">
                             {new Intl.DateTimeFormat('sr-RS', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(session.startTime))}
                           </span>

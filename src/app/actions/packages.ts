@@ -53,6 +53,34 @@ export async function assignPackage(
   return { success: true }
 }
 
+export async function createPackage(
+  _state: PackageState,
+  formData: FormData
+): Promise<PackageState> {
+  await requireRole('ADMIN')
+
+  const name = formData.get('name') as string
+  const type = formData.get('type') as 'GROUP' | 'PERSONAL'
+  const totalSessions = parseInt(formData.get('totalSessions') as string)
+  const price = parseFloat(formData.get('price') as string)
+  const description = formData.get('description') as string
+
+  if (!name || !type || !totalSessions) return { error: 'Popunite sva obavezna polja.' }
+
+  await db.package.create({
+    data: {
+      name,
+      type,
+      totalSessions,
+      price: isNaN(price) ? null : price,
+      description: description || null,
+    },
+  })
+
+  revalidatePath('/admin/packages')
+  return { success: true }
+}
+
 export async function deletePackage(packageId: string): Promise<PackageState> {
   await requireRole('ADMIN')
 

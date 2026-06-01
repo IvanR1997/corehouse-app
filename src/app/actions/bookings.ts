@@ -148,6 +148,7 @@ export async function cancelBooking(bookingId: string): Promise<BookingState> {
     new Intl.DateTimeFormat('sr-RS', {
       weekday: 'short', day: '2-digit', month: '2-digit',
       year: 'numeric', hour: '2-digit', minute: '2-digit',
+      timeZone: 'Europe/Belgrade',
     }).format(d)
 
   if (isLate) {

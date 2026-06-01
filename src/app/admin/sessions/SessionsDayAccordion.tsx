@@ -10,6 +10,7 @@ type Session = {
   maxCapacity: number
   bookingCount: number
   trainerName: string | null
+  clientNames: string[]
 }
 
 type DayGroup = {
@@ -19,7 +20,7 @@ type DayGroup = {
 }
 
 function formatTime(date: Date) {
-  return new Intl.DateTimeFormat('sr-RS', { hour: '2-digit', minute: '2-digit' }).format(new Date(date))
+  return new Intl.DateTimeFormat('sr-RS', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Belgrade' }).format(new Date(date))
 }
 
 export function SessionsDayAccordion({ groups }: { groups: DayGroup[] }) {
@@ -91,6 +92,14 @@ export function SessionsDayAccordion({ groups }: { groups: DayGroup[] }) {
 
                         {session.trainerName && (
                           <p className="text-xs text-zinc-500">{session.trainerName}</p>
+                        )}
+
+                        {session.clientNames.length > 0 && (
+                          <div className="space-y-1">
+                            {session.clientNames.map((name) => (
+                              <p key={name} className="text-xs text-zinc-300 font-medium">👤 {name}</p>
+                            ))}
+                          </div>
                         )}
 
                         <div className="flex items-center gap-2">
