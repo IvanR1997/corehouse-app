@@ -24,8 +24,8 @@ export default async function AdminNotificationsPage() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Obaveštenja</h1>
-          <p className="text-sm text-zinc-400 mt-1">
+          <h1 className="text-2xl font-bold text-text-primary">Obaveštenja</h1>
+          <p className="text-sm text-text-muted mt-1">
             {unread.length} nepročitanih · {read.length} pročitanih
           </p>
         </div>
@@ -33,8 +33,8 @@ export default async function AdminNotificationsPage() {
       </div>
 
       {notifications.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-zinc-700 bg-zinc-900 py-16 text-center">
-          <p className="text-zinc-400">Nema obaveštenja.</p>
+        <div className="rounded-xl border border-dashed border-border-subtle bg-surface-card py-16 text-center">
+          <p className="text-text-muted">Nema obaveštenja.</p>
         </div>
       ) : (
         <div className="space-y-2">
@@ -44,15 +44,15 @@ export default async function AdminNotificationsPage() {
               className={`rounded-xl border p-4 flex items-start justify-between gap-4 transition-colors ${
                 !n.isRead
                   ? 'border-orange-500/30 bg-orange-500/10'
-                  : 'border-zinc-800 bg-zinc-900 opacity-60'
+                  : 'border-border-subtle bg-surface-card opacity-60'
               }`}
             >
               <div>
                 {!n.isRead && (
                   <span className="inline-block rounded-full bg-orange-400 w-2 h-2 mr-2 mb-0.5 align-middle" />
                 )}
-                <span className="text-sm text-zinc-200">{n.message}</span>
-                <p className="text-xs text-zinc-500 mt-1">{formatDateTime(n.createdAt)}</p>
+                <span className="text-sm text-text-secondary">{n.message}</span>
+                <p className="text-xs text-text-muted mt-1">{formatDateTime(n.createdAt)}</p>
               </div>
               {!n.isRead && <MarkNotificationReadButton notificationId={n.id} />}
             </div>

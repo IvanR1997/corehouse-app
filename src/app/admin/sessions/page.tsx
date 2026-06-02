@@ -62,8 +62,8 @@ export default async function AdminSessionsPage() {
     <div>
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-xl md:text-2xl font-bold text-white">Svi termini</h1>
-          <p className="text-sm text-zinc-400 mt-1">
+          <h1 className="text-xl md:text-2xl font-bold text-text-primary">Svi termini</h1>
+          <p className="text-sm text-text-muted mt-1">
             {upcoming.length} nadolazećih · {past.length} prošlih
           </p>
         </div>
@@ -76,14 +76,14 @@ export default async function AdminSessionsPage() {
       </div>
 
       {sessions.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-zinc-700 bg-zinc-900 py-16 text-center">
-          <p className="text-zinc-400">Nema termina u sistemu.</p>
+        <div className="rounded-xl border border-dashed border-border-subtle bg-surface-card py-16 text-center">
+          <p className="text-text-muted">Nema termina u sistemu.</p>
         </div>
       ) : (
         <div className="space-y-8">
           {upcoming.length > 0 && (
             <section>
-              <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-3">
+              <p className="text-xs font-semibold uppercase tracking-widest text-text-muted mb-3">
                 Nadolazeći
               </p>
               <SessionsDayAccordion groups={groups} />
@@ -92,17 +92,17 @@ export default async function AdminSessionsPage() {
 
           {past.length > 0 && (
             <section>
-              <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-3">
+              <p className="text-xs font-semibold uppercase tracking-widest text-text-muted mb-3">
                 Prošli
               </p>
-              <div className="rounded-xl border border-zinc-800 bg-zinc-900 shadow-sm overflow-hidden">
+              <div className="rounded-xl border border-border-subtle bg-surface-card shadow-sm overflow-hidden">
                 <table className="w-full text-sm">
-                  <tbody className="divide-y divide-zinc-800">
+                  <tbody className="divide-y divide-border-subtle">
                     {past.map((session) => (
                       <tr key={session.id} className="opacity-50 hover:opacity-70 transition-opacity">
-                        <td className="px-3 md:px-5 py-3 font-medium text-zinc-200 whitespace-nowrap">
+                        <td className="px-3 md:px-5 py-3 font-medium text-text-secondary whitespace-nowrap">
                           {new Intl.DateTimeFormat('sr-RS', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Belgrade' }).format(new Date(session.startTime))}
-                          <span className="ml-2 text-xs font-normal text-zinc-500">
+                          <span className="ml-2 text-xs font-normal text-text-muted">
                             {new Intl.DateTimeFormat('sr-RS', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(session.startTime))}
                           </span>
                         </td>
@@ -113,8 +113,8 @@ export default async function AdminSessionsPage() {
                             {session.type === 'GROUP' ? 'Vođeni' : 'Personalni'}
                           </span>
                         </td>
-                        <td className="px-3 md:px-5 py-3 text-zinc-500 text-xs hidden md:table-cell">{session.trainer?.name ?? '—'}</td>
-                        <td className="px-3 md:px-5 py-3 text-xs text-zinc-500 hidden md:table-cell">
+                        <td className="px-3 md:px-5 py-3 text-text-muted text-xs hidden md:table-cell">{session.trainer?.name ?? '—'}</td>
+                        <td className="px-3 md:px-5 py-3 text-xs text-text-muted hidden md:table-cell">
                           {session._count.bookings}/{session.maxCapacity}
                         </td>
                         <td className="px-3 md:px-5 py-3 text-right">

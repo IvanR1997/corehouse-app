@@ -1,4 +1,5 @@
 import { logout } from '@/app/actions/auth'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
 type Props = {
   userName: string
@@ -20,14 +21,15 @@ const roleLabel: Record<string, string> = {
 export function TopBar({ userName, role }: Props) {
   return (
     <div className="hidden md:flex items-center justify-end gap-3 mb-6">
+      <ThemeToggle />
       <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${roleBadge[role]}`}>
         {roleLabel[role]}
       </span>
-      <span className="text-sm text-zinc-300 font-medium">{userName}</span>
+      <span className="text-sm text-text-secondary font-medium">{userName}</span>
       <form action={logout}>
         <button
           type="submit"
-          className="rounded-md px-3 py-1.5 text-sm text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors"
+          className="rounded-md px-3 py-1.5 text-sm text-text-muted hover:bg-surface-elevated hover:text-text-primary transition-colors"
         >
           Odjavi se
         </button>

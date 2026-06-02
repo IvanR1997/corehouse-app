@@ -29,7 +29,7 @@ export function DeletePackageButton({
       onClick={handleClick}
       disabled={isPending || assignedCount > 0}
       title={assignedCount > 0 ? 'Paket je dodeljen klijentima' : 'Ukloni paket'}
-      className="rounded-lg border border-zinc-200 px-3 py-1.5 text-xs text-zinc-500 hover:border-red-200 hover:text-red-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+      className="rounded-lg border border-zinc-200 px-3 py-1.5 text-xs text-text-muted hover:border-red-200 hover:text-red-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
     >
       {isPending ? '...' : 'Ukloni'}
     </button>

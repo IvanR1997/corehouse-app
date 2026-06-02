@@ -28,7 +28,7 @@ export default function LoginPage() {
             type="email"
             autoComplete="email"
             required
-            className="block w-full rounded-xl border border-zinc-800 bg-zinc-950 pl-10 pr-4 py-3.5 text-sm text-white placeholder-zinc-600 focus:border-[#EEEE22]/50 focus:outline-none focus:ring-1 focus:ring-[#EEEE22]/30 transition-colors"
+            className="block w-full rounded-xl border border-border-subtle bg-surface pl-10 pr-4 py-3.5 text-sm text-text-primary placeholder-zinc-600 focus:border-[#EEEE22]/50 focus:outline-none focus:ring-1 focus:ring-[#EEEE22]/30 transition-colors"
             placeholder="Email adresa"
           />
         </div>
@@ -44,7 +44,7 @@ export default function LoginPage() {
             type="password"
             autoComplete="current-password"
             required
-            className="block w-full rounded-xl border border-zinc-800 bg-zinc-950 pl-10 pr-4 py-3.5 text-sm text-white placeholder-zinc-600 focus:border-[#EEEE22]/50 focus:outline-none focus:ring-1 focus:ring-[#EEEE22]/30 transition-colors"
+            className="block w-full rounded-xl border border-border-subtle bg-surface pl-10 pr-4 py-3.5 text-sm text-text-primary placeholder-zinc-600 focus:border-[#EEEE22]/50 focus:outline-none focus:ring-1 focus:ring-[#EEEE22]/30 transition-colors"
             placeholder="Lozinka"
           />
         </div>

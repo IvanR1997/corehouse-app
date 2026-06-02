@@ -32,39 +32,39 @@ export default async function AdminRequestsPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-xl md:text-2xl font-bold text-white">Zahtevi za pakete</h1>
-        <p className="text-sm text-zinc-400 mt-1">
+        <h1 className="text-xl md:text-2xl font-bold text-text-primary">Zahtevi za pakete</h1>
+        <p className="text-sm text-text-muted mt-1">
           {requests.filter((r) => r.status === 'PENDING').length} na čekanju · {requests.length} ukupno
         </p>
       </div>
 
       {requests.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-zinc-700 bg-zinc-900 py-16 text-center">
-          <p className="text-zinc-400">Nema zahteva za pakete.</p>
+        <div className="rounded-xl border border-dashed border-border-subtle bg-surface-card py-16 text-center">
+          <p className="text-text-muted">Nema zahteva za pakete.</p>
         </div>
       ) : (
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900 shadow-sm overflow-hidden">
+        <div className="rounded-xl border border-border-subtle bg-surface-card shadow-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-zinc-700 bg-zinc-800/50">
-                <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400">Klijent</th>
-                <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400">Paket</th>
-                <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400 hidden md:table-cell">Datum</th>
-                <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400">Status</th>
+              <tr className="border-b border-border-subtle bg-surface-elevated/50">
+                <th className="px-3 md:px-5 py-3 text-left font-semibold text-text-muted">Klijent</th>
+                <th className="px-3 md:px-5 py-3 text-left font-semibold text-text-muted">Paket</th>
+                <th className="px-3 md:px-5 py-3 text-left font-semibold text-text-muted hidden md:table-cell">Datum</th>
+                <th className="px-3 md:px-5 py-3 text-left font-semibold text-text-muted">Status</th>
                 <th className="px-3 md:px-5 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-800">
+            <tbody className="divide-y divide-border-subtle">
               {requests.map((req) => {
                 const status = statusConfig[req.status]
                 return (
-                  <tr key={req.id} className="hover:bg-zinc-800/30 transition-colors">
+                  <tr key={req.id} className="hover:bg-surface-elevated/30 transition-colors">
                     <td className="px-3 md:px-5 py-4">
-                      <p className="font-medium text-white">{req.user.name}</p>
-                      <p className="text-xs text-zinc-500">{req.user.email}</p>
+                      <p className="font-medium text-text-primary">{req.user.name}</p>
+                      <p className="text-xs text-text-muted">{req.user.email}</p>
                     </td>
                     <td className="px-3 md:px-5 py-4">
-                      <p className="text-zinc-200">{req.package.name}</p>
+                      <p className="text-text-secondary">{req.package.name}</p>
                       <span
                         className={`text-xs font-medium rounded-full px-2 py-0.5 ${
                           req.package.type === 'GROUP'
@@ -75,7 +75,7 @@ export default async function AdminRequestsPage() {
                         {req.package.type === 'GROUP' ? 'Vođeni' : 'Personalni'}
                       </span>
                     </td>
-                    <td className="px-3 md:px-5 py-4 text-zinc-500 text-xs hidden md:table-cell">
+                    <td className="px-3 md:px-5 py-4 text-text-muted text-xs hidden md:table-cell">
                       {formatDate(req.createdAt)}
                     </td>
                     <td className="px-3 md:px-5 py-4">

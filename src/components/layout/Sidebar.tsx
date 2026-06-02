@@ -38,8 +38,8 @@ export function Sidebar({ role, notificationCount = 0 }: Props) {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex w-52 min-h-screen bg-zinc-950 border-r border-zinc-800 flex-col shrink-0">
-        <div className="p-4 border-b border-zinc-800">
+      <aside className="hidden md:flex w-52 min-h-screen bg-surface border-r border-border-subtle flex-col shrink-0">
+        <div className="p-4 border-b border-border-subtle">
           <Link href="/dashboard">
             <Image src={logo} alt="CoreHouse" className="w-full h-auto object-contain" />
           </Link>
@@ -57,10 +57,10 @@ export function Sidebar({ role, notificationCount = 0 }: Props) {
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors relative ${
                   isActive
                     ? 'bg-[#EEEE22] text-zinc-950'
-                    : 'text-zinc-400 hover:text-zinc-950 hover:bg-[#EEEE22]'
+                    : 'text-text-muted hover:text-zinc-950 hover:bg-[#EEEE22]'
                 }`}
               >
-                <span className={isActive ? 'text-zinc-950' : 'text-zinc-500'}>{l.icon}</span>
+                <span className={isActive ? 'text-zinc-950' : 'text-text-muted'}>{l.icon}</span>
                 {l.label}
                 {hasNotification && (
                   <span className="absolute right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
@@ -74,7 +74,7 @@ export function Sidebar({ role, notificationCount = 0 }: Props) {
       </aside>
 
       {/* Mobile bottom nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-zinc-950 border-t border-zinc-800 flex">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-surface border-t border-border-subtle flex">
         {links.map((l) => {
           const isActive = pathname.startsWith(l.href)
           const hasNotification = l.href === '/admin/notifications' && notificationCount > 0
@@ -84,7 +84,7 @@ export function Sidebar({ role, notificationCount = 0 }: Props) {
               key={l.href}
               href={l.href}
               className={`flex-1 flex flex-col items-center justify-center py-3 gap-1 text-xs font-medium transition-colors relative ${
-                isActive ? 'text-[#EEEE22]' : 'text-zinc-500'
+                isActive ? 'text-[#EEEE22]' : 'text-text-muted'
               }`}
             >
               {l.icon}
@@ -100,7 +100,7 @@ export function Sidebar({ role, notificationCount = 0 }: Props) {
         <form action={logout} className="flex-1 flex">
           <button
             type="submit"
-            className="flex-1 flex flex-col items-center justify-center py-3 gap-1 text-xs font-medium text-zinc-500"
+            className="flex-1 flex flex-col items-center justify-center py-3 gap-1 text-xs font-medium text-text-muted"
           >
             <LogoutIcon />
             <span>Odjava</span>

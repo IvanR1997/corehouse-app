@@ -129,34 +129,34 @@ function Calendar({
 
   return (
     <div>
-      <div className="rounded-xl border border-zinc-800 bg-zinc-900 shadow-sm overflow-hidden">
+      <div className="rounded-xl border border-border-subtle bg-surface-card shadow-sm overflow-hidden">
         {/* Month nav */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-700">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-border-subtle">
           <button
             onClick={() =>
               setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1))
             }
-            className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-zinc-800 transition-colors text-zinc-400 text-lg"
+            className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-elevated transition-colors text-text-muted text-lg"
           >
             ‹
           </button>
-          <h2 className="font-semibold text-white">
+          <h2 className="font-semibold text-text-primary">
             {MONTHS[currentMonth.getMonth()]} {currentMonth.getFullYear()}.
           </h2>
           <button
             onClick={() =>
               setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1))
             }
-            className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-zinc-800 transition-colors text-zinc-400 text-lg"
+            className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-elevated transition-colors text-text-muted text-lg"
           >
             ›
           </button>
         </div>
 
         {/* Weekday headers */}
-        <div className="grid grid-cols-7 border-b border-zinc-700">
+        <div className="grid grid-cols-7 border-b border-border-subtle">
           {DAYS.map((d) => (
-            <div key={d} className="py-2 text-center text-xs font-medium text-zinc-400">
+            <div key={d} className="py-2 text-center text-xs font-medium text-text-muted">
               {d}
             </div>
           ))}
@@ -191,8 +191,8 @@ function Calendar({
                     ? 'bg-orange-500 text-zinc-950'
                     : isToday
                     ? 'text-orange-500 font-semibold'
-                    : 'text-zinc-200',
-                  isClickable && !isSelected ? 'hover:bg-zinc-800/50 cursor-pointer' : '',
+                    : 'text-text-secondary',
+                  isClickable && !isSelected ? 'hover:bg-surface-elevated/50 cursor-pointer' : '',
                   !isClickable ? 'opacity-30 cursor-default' : '',
                 ]
                   .filter(Boolean)
@@ -215,12 +215,12 @@ function Calendar({
       {/* Time slots for selected date */}
       <div className="mt-6">
         {!selectedDate ? (
-          <div className="rounded-xl border border-dashed border-zinc-700 py-14 text-center">
-            <p className="text-zinc-400 text-sm">Izaberite datum da vidite dostupne termine</p>
+          <div className="rounded-xl border border-dashed border-border-subtle py-14 text-center">
+            <p className="text-text-muted text-sm">Izaberite datum da vidite dostupne termine</p>
           </div>
         ) : (
           <>
-            <h3 className="text-base font-semibold text-white mb-4">
+            <h3 className="text-base font-semibold text-text-primary mb-4">
               {selectedDate.toLocaleDateString('sr-RS', {
                 weekday: 'long',
                 day: 'numeric',
@@ -237,14 +237,14 @@ function Calendar({
                       const blockedByDayLimit = alreadyBookedToday && !session?.isBooked
 
                       return (
-                        <div key={slot} className="rounded-xl border border-zinc-800 bg-zinc-900 p-4 shadow-sm">
+                        <div key={slot} className="rounded-xl border border-border-subtle bg-surface-card p-4 shadow-sm">
                           <div className="flex items-center justify-between mb-3">
-                            <span className="text-2xl font-bold text-white">{slot}</span>
+                            <span className="text-2xl font-bold text-text-primary">{slot}</span>
                             {isFull && <span className="text-xs font-medium text-red-400">Popunjeno</span>}
                           </div>
 
                           {blockedByDayLimit ? (
-                            <span className="block w-full rounded-lg bg-zinc-800 px-4 py-2 text-center text-xs text-zinc-400">
+                            <span className="block w-full rounded-lg bg-surface-elevated px-4 py-2 text-center text-xs text-text-muted">
                               Jedan termin po danu
                             </span>
                           ) : session ? (
@@ -298,7 +298,7 @@ export function SessionsCalendar({ sessions, hasGroupPackage, hasPersonalPackage
 
   return (
     <div>
-      <div className="flex gap-2 mb-6 p-1 bg-zinc-800 rounded-xl w-fit">
+      <div className="flex gap-2 mb-6 p-1 bg-surface-elevated rounded-xl w-fit">
         {tabs.map((tab) => (
           <button
             key={tab.key}
@@ -306,13 +306,13 @@ export function SessionsCalendar({ sessions, hasGroupPackage, hasPersonalPackage
             className={[
               'px-5 py-2 rounded-lg text-sm font-semibold transition-colors',
               activeTab === tab.key
-                ? 'bg-zinc-900 text-white shadow-sm'
-                : 'text-zinc-400 hover:text-zinc-200',
+                ? 'bg-surface-card text-text-primary shadow-sm'
+                : 'text-text-muted hover:text-text-secondary',
             ].join(' ')}
           >
             {tab.label}
             {!tab.has && (
-              <span className="ml-1.5 text-xs font-normal text-zinc-400">(nema paket)</span>
+              <span className="ml-1.5 text-xs font-normal text-text-muted">(nema paket)</span>
             )}
           </button>
         ))}

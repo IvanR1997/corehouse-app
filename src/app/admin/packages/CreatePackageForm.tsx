@@ -20,10 +20,10 @@ export function CreatePackageForm() {
   }
 
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-5 mb-6">
+    <div className="rounded-xl border border-border-subtle bg-surface-card p-5 mb-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-semibold text-white">Novi paket</h3>
-        <button onClick={() => setOpen(false)} className="text-zinc-500 hover:text-white text-sm">Otkaži</button>
+        <h3 className="font-semibold text-text-primary">Novi paket</h3>
+        <button onClick={() => setOpen(false)} className="text-text-muted hover:text-text-primary text-sm">Otkaži</button>
       </div>
 
       {state?.error && (
@@ -39,27 +39,27 @@ export function CreatePackageForm() {
 
       <form action={action} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-medium text-zinc-400 mb-1">Naziv *</label>
-          <input name="name" required placeholder="npr. Vođeni 8" className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-white placeholder-zinc-500 focus:border-[#EEEE22]/50 focus:outline-none" />
+          <label className="block text-xs font-medium text-text-muted mb-1">Naziv *</label>
+          <input name="name" required placeholder="npr. Vođeni 8" className="w-full rounded-lg border border-border-subtle bg-surface-elevated px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-[#EEEE22]/50 focus:outline-none" />
         </div>
         <div>
-          <label className="block text-xs font-medium text-zinc-400 mb-1">Tip *</label>
-          <select name="type" required className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-white focus:border-[#EEEE22]/50 focus:outline-none">
+          <label className="block text-xs font-medium text-text-muted mb-1">Tip *</label>
+          <select name="type" required className="w-full rounded-lg border border-border-subtle bg-surface-elevated px-3 py-2 text-sm text-text-primary focus:border-[#EEEE22]/50 focus:outline-none">
             <option value="GROUP">Vođeni</option>
             <option value="PERSONAL">Personalni</option>
           </select>
         </div>
         <div>
-          <label className="block text-xs font-medium text-zinc-400 mb-1">Broj treninga *</label>
-          <input name="totalSessions" type="number" min="1" required placeholder="npr. 8" className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-white placeholder-zinc-500 focus:border-[#EEEE22]/50 focus:outline-none" />
+          <label className="block text-xs font-medium text-text-muted mb-1">Broj treninga *</label>
+          <input name="totalSessions" type="number" min="1" required placeholder="npr. 8" className="w-full rounded-lg border border-border-subtle bg-surface-elevated px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-[#EEEE22]/50 focus:outline-none" />
         </div>
         <div>
-          <label className="block text-xs font-medium text-zinc-400 mb-1">Cena (RSD)</label>
-          <input name="price" type="number" min="0" placeholder="npr. 8000" className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-white placeholder-zinc-500 focus:border-[#EEEE22]/50 focus:outline-none" />
+          <label className="block text-xs font-medium text-text-muted mb-1">Cena (RSD)</label>
+          <input name="price" type="number" min="0" placeholder="npr. 8000" className="w-full rounded-lg border border-border-subtle bg-surface-elevated px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-[#EEEE22]/50 focus:outline-none" />
         </div>
         <div className="sm:col-span-2">
-          <label className="block text-xs font-medium text-zinc-400 mb-1">Opis</label>
-          <input name="description" placeholder="npr. Uključuje 4 opravke" className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-white placeholder-zinc-500 focus:border-[#EEEE22]/50 focus:outline-none" />
+          <label className="block text-xs font-medium text-text-muted mb-1">Opis</label>
+          <input name="description" placeholder="npr. Uključuje 4 opravke" className="w-full rounded-lg border border-border-subtle bg-surface-elevated px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-[#EEEE22]/50 focus:outline-none" />
         </div>
         <div className="sm:col-span-2">
           <SubmitButton pendingText="Kreiram...">Kreiraj paket</SubmitButton>

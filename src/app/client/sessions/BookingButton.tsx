@@ -25,7 +25,7 @@ export function BookingButton({ sessionId, isBooked, canBook, isFull, missingPac
 
   if (isFull) {
     return (
-      <span className="block w-full rounded-lg bg-zinc-800 px-4 py-2 text-center text-sm text-zinc-400">
+      <span className="block w-full rounded-lg bg-surface-elevated px-4 py-2 text-center text-sm text-text-muted">
         Popunjeno
       </span>
     )

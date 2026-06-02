@@ -46,15 +46,15 @@ export default async function ActivateClientPackagePage({
           <a href="/admin/clients" className="text-sm text-orange-500 hover:underline">
             ← Nazad na klijente
           </a>
-          <h1 className="text-xl md:text-2xl font-bold text-white mt-1">Paketi za {client.name}</h1>
-          <p className="text-sm text-zinc-400">{client.email}</p>
+          <h1 className="text-xl md:text-2xl font-bold text-text-primary mt-1">Paketi za {client.name}</h1>
+          <p className="text-sm text-text-muted">{client.email}</p>
         </div>
         <DeleteClientButton clientId={client.id} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <section>
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500 mb-3">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-text-muted mb-3">
             Dodeli novi paket
           </h2>
           <AssignPackageForm
@@ -65,24 +65,24 @@ export default async function ActivateClientPackagePage({
         </section>
 
         <section>
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500 mb-3">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-text-muted mb-3">
             Paketi klijenta
           </h2>
 
           {client.packages.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-zinc-700 bg-zinc-900 py-8 text-center">
-              <p className="text-sm text-zinc-400">Klijent nema paketa.</p>
+            <div className="rounded-xl border border-dashed border-border-subtle bg-surface-card py-8 text-center">
+              <p className="text-sm text-text-muted">Klijent nema paketa.</p>
             </div>
           ) : (
             <div className="space-y-3">
               {client.packages.map((cp) => (
                 <div
                   key={cp.id}
-                  className="rounded-xl border border-zinc-800 bg-zinc-900 p-5 flex items-center justify-between gap-4"
+                  className="rounded-xl border border-border-subtle bg-surface-card p-5 flex items-center justify-between gap-4"
                 >
                   <div className="min-w-0">
                     <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <p className="font-semibold text-white">{cp.package.name}</p>
+                      <p className="font-semibold text-text-primary">{cp.package.name}</p>
                       <span
                         className={`rounded-full px-2 py-0.5 text-xs font-medium ${
                           cp.package.type === 'GROUP'
@@ -93,11 +93,11 @@ export default async function ActivateClientPackagePage({
                         {cp.package.type === 'GROUP' ? 'Vođeni' : 'Personalni'}
                       </span>
                     </div>
-                    <p className="text-xs text-zinc-400">
+                    <p className="text-xs text-text-muted">
                       Preostalo: {cp.remainingSessions} / {cp.package.totalSessions} termina
                     </p>
                     {cp.activatedAt && (
-                      <p className="text-xs text-zinc-500">Aktivirano: {formatDate(cp.activatedAt)}</p>
+                      <p className="text-xs text-text-muted">Aktivirano: {formatDate(cp.activatedAt)}</p>
                     )}
                   </div>
 

@@ -58,16 +58,16 @@ function PackageBanner({
   }
 
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900 px-5 py-4 flex items-center justify-between gap-4">
+    <div className="rounded-xl border border-border-subtle bg-surface-card px-5 py-4 flex items-center justify-between gap-4">
       <div className="flex-1">
         <div className="flex items-center justify-between mb-1.5">
-          <p className="text-sm font-semibold text-zinc-100">{name}</p>
+          <p className="text-sm font-semibold text-text-primary">{name}</p>
           <div className="text-right">
-            <span className="text-sm font-medium text-zinc-300">{remaining} / {total}</span>
-            {expiryText && <p className="text-xs text-zinc-400">{expiryText}</p>}
+            <span className="text-sm font-medium text-text-secondary">{remaining} / {total}</span>
+            {expiryText && <p className="text-xs text-text-muted">{expiryText}</p>}
           </div>
         </div>
-        <div className="w-full rounded-full bg-zinc-800 h-1.5">
+        <div className="w-full rounded-full bg-surface-elevated h-1.5">
           <div className="rounded-full bg-orange-400 h-1.5" style={{ width: `${pct}%` }} />
         </div>
       </div>
@@ -143,8 +143,8 @@ export default async function ClientSessionsPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white">Dostupni termini</h1>
-        <p className="text-sm text-zinc-500 mt-1">
+        <h1 className="text-2xl font-bold text-text-primary">Dostupni termini</h1>
+        <p className="text-sm text-text-muted mt-1">
           Izaberite tip treninga, pa datum i termin
         </p>
       </div>

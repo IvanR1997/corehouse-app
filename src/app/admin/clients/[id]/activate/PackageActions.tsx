@@ -36,7 +36,7 @@ export function RemovePackageButton({ clientPackageId }: { clientPackageId: stri
         })
       }}
       disabled={isPending}
-      className="rounded-lg border border-zinc-800 px-3 py-2 text-sm text-zinc-400 hover:border-red-200 hover:text-red-500 disabled:opacity-50 transition-colors"
+      className="rounded-lg border border-border-subtle px-3 py-2 text-sm text-text-muted hover:border-red-200 hover:text-red-500 disabled:opacity-50 transition-colors"
     >
       {isPending ? '...' : 'Ukloni'}
     </button>
@@ -59,9 +59,9 @@ export function AssignPackageForm({ userId, groupPackages, personalPackages }: A
   const packages = activeTab === 'GROUP' ? groupPackages : personalPackages
 
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-5">
+    <div className="rounded-xl border border-border-subtle bg-surface-card p-5">
       {/* Tabs */}
-      <div className="flex gap-1 p-1 bg-zinc-800 rounded-lg w-fit mb-4">
+      <div className="flex gap-1 p-1 bg-surface-elevated rounded-lg w-fit mb-4">
         {[
           { key: 'GROUP' as const, label: 'Vođeni' },
           { key: 'PERSONAL' as const, label: 'Personalni' },
@@ -73,8 +73,8 @@ export function AssignPackageForm({ userId, groupPackages, personalPackages }: A
             className={[
               'px-4 py-1.5 rounded-md text-sm font-semibold transition-colors',
               activeTab === tab.key
-                ? 'bg-zinc-900 text-white shadow-sm'
-                : 'text-zinc-400 hover:text-zinc-200',
+                ? 'bg-surface-card text-text-primary shadow-sm'
+                : 'text-text-muted hover:text-text-secondary',
             ].join(' ')}
           >
             {tab.label}
@@ -94,19 +94,19 @@ export function AssignPackageForm({ userId, groupPackages, personalPackages }: A
       )}
 
       {packages.length === 0 ? (
-        <p className="text-sm text-zinc-500">Nema paketa za ovaj tip treninga.</p>
+        <p className="text-sm text-text-muted">Nema paketa za ovaj tip treninga.</p>
       ) : (
         <form action={action} className="space-y-3">
           <input type="hidden" name="tab" value={activeTab} />
           <div>
-            <label htmlFor="packageId" className="block text-sm font-medium text-zinc-200 mb-1.5">
+            <label htmlFor="packageId" className="block text-sm font-medium text-text-secondary mb-1.5">
               Odaberi paket
             </label>
             <select
               id="packageId"
               name="packageId"
               required
-              className="block w-full rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+              className="block w-full rounded-lg border border-border-subtle bg-surface-card px-3 py-2.5 text-sm text-text-primary focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
             >
               {packages.map((pkg) => (
                 <option key={pkg.id} value={pkg.id}>

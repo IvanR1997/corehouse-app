@@ -7,7 +7,7 @@ export default async function TrainerLayout({ children }: { children: React.Reac
   const user = await requireRole('TRAINER')
 
   return (
-    <div className="flex min-h-screen bg-zinc-950">
+    <div className="flex min-h-screen bg-surface">
       <Sidebar userName={user.name} role="TRAINER" />
       <main className="flex-1 px-4 md:px-6 py-6 pb-24 md:pb-8 overflow-auto">
         <MobileHeader />

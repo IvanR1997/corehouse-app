@@ -28,7 +28,7 @@ export function CancelBookingButton({
     <button
       onClick={handleClick}
       disabled={isPending}
-      className="rounded-lg border border-zinc-800 px-3 py-1.5 text-xs text-zinc-400 hover:border-red-500/30 hover:text-red-400 disabled:opacity-50 transition-colors"
+      className="rounded-lg border border-border-subtle px-3 py-1.5 text-xs text-text-muted hover:border-red-500/30 hover:text-red-400 disabled:opacity-50 transition-colors"
     >
       {isPending ? '...' : 'Otkaži'}
     </button>

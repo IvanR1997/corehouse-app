@@ -25,7 +25,7 @@ function expiryLabel(activatedAt: Date | null) {
 
   if (daysLeft < 0) return { text: 'Istekao', className: 'text-red-500 font-medium' }
   if (daysLeft <= 5) return { text: `${formatDate(exp)} (${daysLeft}d)`, className: 'text-amber-500 font-medium' }
-  return { text: formatDate(exp), className: 'text-zinc-300' }
+  return { text: formatDate(exp), className: 'text-text-secondary' }
 }
 
 export default async function AdminClientsPage() {
@@ -46,47 +46,47 @@ export default async function AdminClientsPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-xl md:text-2xl font-bold text-white">Klijenti</h1>
-        <p className="text-sm text-zinc-400 mt-1">{clients.length} registrovanih klijenata</p>
+        <h1 className="text-xl md:text-2xl font-bold text-text-primary">Klijenti</h1>
+        <p className="text-sm text-text-muted mt-1">{clients.length} registrovanih klijenata</p>
       </div>
 
       {clients.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-zinc-700 bg-zinc-900 py-16 text-center">
-          <p className="text-zinc-400">Nema registrovanih klijenata.</p>
+        <div className="rounded-xl border border-dashed border-border-subtle bg-surface-card py-16 text-center">
+          <p className="text-text-muted">Nema registrovanih klijenata.</p>
         </div>
       ) : (
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900 shadow-sm overflow-hidden">
+        <div className="rounded-xl border border-border-subtle bg-surface-card shadow-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-zinc-700 bg-zinc-800/50">
-                <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400">Klijent</th>
-                <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400 whitespace-nowrap hidden md:table-cell">Aktivan paket</th>
-                <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400 hidden md:table-cell">Iskorišćeno</th>
-                <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400 hidden md:table-cell">Uplata</th>
-                <th className="px-3 md:px-5 py-3 text-left font-semibold text-zinc-400 hidden md:table-cell">Ističe</th>
-                <th className="px-3 md:px-5 py-3 text-right font-semibold text-zinc-400">Akcija</th>
+              <tr className="border-b border-border-subtle bg-surface-elevated/50">
+                <th className="px-3 md:px-5 py-3 text-left font-semibold text-text-muted">Klijent</th>
+                <th className="px-3 md:px-5 py-3 text-left font-semibold text-text-muted whitespace-nowrap hidden md:table-cell">Aktivan paket</th>
+                <th className="px-3 md:px-5 py-3 text-left font-semibold text-text-muted hidden md:table-cell">Iskorišćeno</th>
+                <th className="px-3 md:px-5 py-3 text-left font-semibold text-text-muted hidden md:table-cell">Uplata</th>
+                <th className="px-3 md:px-5 py-3 text-left font-semibold text-text-muted hidden md:table-cell">Ističe</th>
+                <th className="px-3 md:px-5 py-3 text-right font-semibold text-text-muted">Akcija</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-800">
+            <tbody className="divide-y divide-border-subtle">
               {clients.map((client) => {
                 const activePackages = client.packages.filter((p) => p.isActive)
                 const hasInactive = client.packages.some((p) => !p.isActive)
 
                 return (
-                  <tr key={client.id} className="hover:bg-zinc-800/30 transition-colors">
+                  <tr key={client.id} className="hover:bg-surface-elevated/30 transition-colors">
                     <td className="px-3 md:px-5 py-4">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-orange-500/15 flex items-center justify-center text-sm font-semibold text-orange-400">
                           {client.name[0]}
                         </div>
-                        <span className="font-medium text-white whitespace-nowrap">{client.name}</span>
+                        <span className="font-medium text-text-primary whitespace-nowrap">{client.name}</span>
                       </div>
                     </td>
 
                     {/* Aktivan paket */}
                     <td className="px-3 md:px-5 py-4 hidden md:table-cell">
                       {activePackages.length === 0 ? (
-                        <span className="text-xs text-zinc-500">
+                        <span className="text-xs text-text-muted">
                           {hasInactive ? 'čeka aktivaciju' : 'bez paketa'}
                         </span>
                       ) : (
@@ -110,7 +110,7 @@ export default async function AdminClientsPage() {
                     {/* Iskorišćeno */}
                     <td className="px-3 md:px-5 py-4 hidden md:table-cell">
                       {activePackages.length === 0 ? (
-                        <span className="text-xs text-zinc-600">—</span>
+                        <span className="text-xs text-text-muted">—</span>
                       ) : (
                         <div className="space-y-2">
                           {activePackages.map((p) => {
@@ -118,13 +118,13 @@ export default async function AdminClientsPage() {
                             const pct = Math.round((used / p.package.totalSessions) * 100)
                             return (
                               <div key={p.id} className="flex items-center gap-2">
-                                <div className="w-20 rounded-full bg-zinc-800 h-1.5">
+                                <div className="w-20 rounded-full bg-surface-elevated h-1.5">
                                   <div
                                     className="rounded-full bg-orange-400 h-1.5"
                                     style={{ width: `${pct}%` }}
                                   />
                                 </div>
-                                <span className="text-xs text-zinc-300">
+                                <span className="text-xs text-text-secondary">
                                   {used} / {p.package.totalSessions}
                                 </span>
                               </div>
@@ -137,11 +137,11 @@ export default async function AdminClientsPage() {
                     {/* Uplata */}
                     <td className="px-3 md:px-5 py-4 hidden md:table-cell">
                       {activePackages.length === 0 ? (
-                        <span className="text-xs text-zinc-600">—</span>
+                        <span className="text-xs text-text-muted">—</span>
                       ) : (
                         <div className="space-y-1">
                           {activePackages.map((p) => (
-                            <p key={p.id} className="text-xs text-zinc-300">
+                            <p key={p.id} className="text-xs text-text-secondary">
                               {formatDate(p.activatedAt)}
                             </p>
                           ))}
@@ -152,13 +152,13 @@ export default async function AdminClientsPage() {
                     {/* Ističe */}
                     <td className="px-3 md:px-5 py-4 hidden md:table-cell">
                       {activePackages.length === 0 ? (
-                        <span className="text-xs text-zinc-600">—</span>
+                        <span className="text-xs text-text-muted">—</span>
                       ) : (
                         <div className="space-y-1">
                           {activePackages.map((p) => {
                             const label = expiryLabel(p.activatedAt)
                             return (
-                              <p key={p.id} className={`text-xs ${label?.className ?? 'text-zinc-600'}`}>
+                              <p key={p.id} className={`text-xs ${label?.className ?? 'text-text-muted'}`}>
                                 {label?.text ?? '—'}
                               </p>
                             )

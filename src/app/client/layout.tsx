@@ -7,7 +7,7 @@ export default async function ClientLayout({ children }: { children: React.React
   const user = await requireRole('CLIENT')
 
   return (
-    <div className="flex min-h-screen bg-zinc-950">
+    <div className="flex min-h-screen bg-surface">
       <Sidebar userName={user.name} role="CLIENT" />
       <main className="flex-1 px-4 md:px-6 py-6 pb-24 md:pb-8 overflow-auto">
         <MobileHeader />

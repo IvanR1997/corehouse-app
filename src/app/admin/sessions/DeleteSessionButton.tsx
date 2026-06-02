@@ -28,7 +28,7 @@ export function DeleteSessionButton({
     <button
       onClick={handleClick}
       disabled={isPending}
-      className="rounded-lg border border-zinc-200 px-3 py-1.5 text-xs text-zinc-500 hover:border-red-200 hover:text-red-500 disabled:opacity-50 transition-colors"
+      className="rounded-lg border border-zinc-200 px-3 py-1.5 text-xs text-text-muted hover:border-red-200 hover:text-red-500 disabled:opacity-50 transition-colors"
     >
       {isPending ? '...' : 'Ukloni'}
     </button>

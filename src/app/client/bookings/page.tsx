@@ -37,7 +37,7 @@ export default async function ClientBookingsPage() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Moje rezervacije</h1>
+          <h1 className="text-2xl font-bold text-text-primary">Moje rezervacije</h1>
           {unreadCount > 0 && (
             <p className="text-sm text-orange-500 mt-1">
               {unreadCount} {unreadCount === 1 ? 'nova notifikacija' : 'novih notifikacija'}
@@ -48,8 +48,8 @@ export default async function ClientBookingsPage() {
       </div>
 
       {bookings.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-zinc-700 bg-zinc-900 py-16 text-center">
-          <p className="text-zinc-500">Nemate rezervacija.</p>
+        <div className="rounded-xl border border-dashed border-border-subtle bg-surface-card py-16 text-center">
+          <p className="text-text-muted">Nemate rezervacija.</p>
         </div>
       ) : (
         <div className="space-y-8">
@@ -65,10 +65,10 @@ export default async function ClientBookingsPage() {
                   return (
                     <div
                       key={booking.id}
-                      className={`rounded-xl border bg-zinc-900 p-5 transition-colors ${
+                      className={`rounded-xl border bg-surface-card p-5 transition-colors ${
                         !booking.notificationRead
                           ? 'border-orange-500/30 bg-orange-500/10'
-                          : 'border-zinc-800'
+                          : 'border-border-subtle'
                       } ${isPast ? 'opacity-60' : ''}`}
                     >
                       <div className="flex items-start justify-between gap-4">
@@ -82,16 +82,16 @@ export default async function ClientBookingsPage() {
                               {booking.session.type === 'GROUP' ? 'Vođeni' : 'Personalni'}
                             </span>
                             {isPast && (
-                              <span className="rounded-full bg-zinc-800 px-2 py-0.5 text-xs text-zinc-300">Završen</span>
+                              <span className="rounded-full bg-surface-elevated px-2 py-0.5 text-xs text-text-secondary">Završen</span>
                             )}
                             {!booking.notificationRead && !isPast && (
                               <span className="rounded-full bg-orange-500/15 px-2 py-0.5 text-xs font-semibold text-orange-400">Novo</span>
                             )}
                           </div>
-                          <p className="text-sm font-semibold text-zinc-100">
+                          <p className="text-sm font-semibold text-text-primary">
                             {formatDateTime(booking.session.startTime)}
                           </p>
-                          <p className="text-xs text-zinc-400 mt-0.5">
+                          <p className="text-xs text-text-muted mt-0.5">
                             Rezervisano: {formatDateTime(booking.createdAt)}
                           </p>
                         </div>
@@ -114,7 +114,7 @@ export default async function ClientBookingsPage() {
           {/* Cancelled bookings */}
           {cancelledBookings.length > 0 && (
             <section>
-              <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-3">Otkazani termini</h2>
+              <h2 className="text-xs font-semibold uppercase tracking-widest text-text-muted mb-3">Otkazani termini</h2>
               <div className="space-y-3">
                 {cancelledBookings.map((booking) => (
                   <div
@@ -122,7 +122,7 @@ export default async function ClientBookingsPage() {
                     className={`rounded-xl border p-5 ${
                       booking.lateCancellation
                         ? 'border-red-500/30 bg-red-500/10'
-                        : 'border-zinc-800 bg-zinc-800/50 opacity-60'
+                        : 'border-border-subtle bg-surface-elevated/50 opacity-60'
                     }`}
                   >
                     <div className="flex items-start justify-between gap-4">
@@ -140,14 +140,14 @@ export default async function ClientBookingsPage() {
                               Kasno otkazivanje — termin potrošen
                             </span>
                           ) : (
-                            <span className="rounded-full bg-zinc-700 px-2 py-0.5 text-xs text-zinc-300">Otkazano</span>
+                            <span className="rounded-full bg-surface-elevated px-2 py-0.5 text-xs text-text-secondary">Otkazano</span>
                           )}
                         </div>
-                        <p className="text-sm font-semibold text-zinc-200">
+                        <p className="text-sm font-semibold text-text-secondary">
                           {formatDateTime(booking.session.startTime)}
                         </p>
                         {booking.cancelledAt && (
-                          <p className="text-xs text-zinc-400 mt-0.5">
+                          <p className="text-xs text-text-muted mt-0.5">
                             Otkazano: {formatDateTime(booking.cancelledAt)}
                           </p>
                         )}

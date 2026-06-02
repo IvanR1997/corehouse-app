@@ -44,8 +44,8 @@ export default async function ClientPackagesPage() {
       {/* Available Packages */}
       <section>
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-white">Dostupni paketi</h1>
-          <p className="text-sm text-zinc-500 mt-1">Odaberite paket koji vam odgovara</p>
+          <h1 className="text-2xl font-bold text-text-primary">Dostupni paketi</h1>
+          <p className="text-sm text-text-muted mt-1">Odaberite paket koji vam odgovara</p>
         </div>
 
         <div className="space-y-8">
@@ -56,21 +56,21 @@ export default async function ClientPackagesPage() {
             ]
           ).map(({ key, label, packages: pkgs, activePackage }) => (
             <div key={key}>
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-400 mb-3">
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-text-muted mb-3">
                 {label}
               </h2>
 
               {pkgs.length === 0 ? (
-                <div className="rounded-xl border border-dashed border-zinc-700 bg-zinc-900 py-8 text-center">
-                  <p className="text-sm text-zinc-500">Nema dostupnih paketa.</p>
+                <div className="rounded-xl border border-dashed border-border-subtle bg-surface-card py-8 text-center">
+                  <p className="text-sm text-text-muted">Nema dostupnih paketa.</p>
                 </div>
               ) : (
                 <div className="grid gap-4 sm:grid-cols-2">
                   {pkgs.map((pkg) => (
-                    <div key={pkg.id} className="rounded-xl border border-zinc-800 bg-zinc-900 p-5 flex flex-col gap-4">
+                    <div key={pkg.id} className="rounded-xl border border-border-subtle bg-surface-card p-5 flex flex-col gap-4">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <p className="font-semibold text-white">{pkg.name}</p>
+                          <p className="font-semibold text-text-primary">{pkg.name}</p>
                           <span
                             className={`text-xs font-medium rounded-full px-2 py-0.5 ${
                               key === 'GROUP'
@@ -81,20 +81,20 @@ export default async function ClientPackagesPage() {
                             {key === 'GROUP' ? 'Vođeni' : 'Personalni'}
                           </span>
                           {pkg.description && (
-                            <p className="text-xs text-zinc-500 mt-1">{pkg.description}</p>
+                            <p className="text-xs text-text-muted mt-1">{pkg.description}</p>
                           )}
                         </div>
                       </div>
 
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-zinc-400">
+                        <span className="text-text-muted">
                           {pkg.totalSessions} {pkg.totalSessions === 1 ? 'trening' : 'treninga'}
                         </span>
-                        <span className="font-semibold text-white">{formatPrice(pkg.price)}</span>
+                        <span className="font-semibold text-text-primary">{formatPrice(pkg.price)}</span>
                       </div>
 
                       {activePackage ? (
-                        <div className="w-full rounded-xl border border-zinc-700 bg-zinc-800/50 px-4 py-3 text-center text-sm text-zinc-400">
+                        <div className="w-full rounded-xl border border-border-subtle bg-surface-elevated/50 px-4 py-3 text-center text-sm text-text-muted">
                           Već imate aktivan paket
                         </div>
                       ) : (
@@ -112,19 +112,19 @@ export default async function ClientPackagesPage() {
       {/* My Packages */}
       <section>
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-white">Moji paketi</h1>
-          <p className="text-sm text-zinc-500 mt-1">Pregled vaših aktivnih i neaktivnih paketa</p>
+          <h1 className="text-2xl font-bold text-text-primary">Moji paketi</h1>
+          <p className="text-sm text-text-muted mt-1">Pregled vaših aktivnih i neaktivnih paketa</p>
         </div>
 
         {clientPackages.length === 0 ? (
-          <div className="rounded-xl border border-dashed border-zinc-700 bg-zinc-900 py-16 text-center">
-            <p className="text-zinc-500">Nemate paketa. Kontaktirajte admin.</p>
+          <div className="rounded-xl border border-dashed border-border-subtle bg-surface-card py-16 text-center">
+            <p className="text-text-muted">Nemate paketa. Kontaktirajte admin.</p>
           </div>
         ) : (
           <div className="space-y-6">
             {active.length > 0 && (
               <div>
-                <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-400 mb-3">
+                <h2 className="text-sm font-semibold uppercase tracking-wide text-text-muted mb-3">
                   Aktivni paketi
                 </h2>
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -137,7 +137,7 @@ export default async function ClientPackagesPage() {
 
             {inactive.length > 0 && (
               <div>
-                <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-400 mb-3">
+                <h2 className="text-sm font-semibold uppercase tracking-wide text-text-muted mb-3">
                   Neaktivni paketi
                 </h2>
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -175,12 +175,12 @@ function PackageCard({ cp }: PackageCardProps) {
   return (
     <div
       className={`rounded-xl border p-5 ${
-        cp.isActive ? 'border-zinc-800 bg-zinc-900 shadow-sm' : 'border-dashed border-zinc-800 bg-zinc-800/50'
+        cp.isActive ? 'border-border-subtle bg-surface-card shadow-sm' : 'border-dashed border-border-subtle bg-surface-elevated/50'
       }`}
     >
       <div className="flex items-start justify-between mb-3">
         <div>
-          <p className="font-semibold text-white">{cp.package.name}</p>
+          <p className="font-semibold text-text-primary">{cp.package.name}</p>
           <span
             className={`text-xs font-medium rounded-full px-2 py-0.5 ${
               cp.package.type === 'GROUP'
@@ -191,7 +191,7 @@ function PackageCard({ cp }: PackageCardProps) {
             {cp.package.type === 'GROUP' ? 'Vođeni' : 'Personalni'}
           </span>
           {cp.package.description && (
-            <p className="text-xs text-zinc-500 mt-1">{cp.package.description}</p>
+            <p className="text-xs text-text-muted mt-1">{cp.package.description}</p>
           )}
         </div>
         {cp.isActive ? (
@@ -199,7 +199,7 @@ function PackageCard({ cp }: PackageCardProps) {
             Aktivan
           </span>
         ) : (
-          <span className="rounded-full bg-zinc-700 px-2.5 py-0.5 text-xs font-semibold text-zinc-300">
+          <span className="rounded-full bg-surface-elevated px-2.5 py-0.5 text-xs font-semibold text-text-secondary">
             Čeka aktivaciju
           </span>
         )}
@@ -207,20 +207,20 @@ function PackageCard({ cp }: PackageCardProps) {
 
       {cp.isActive && (
         <>
-          <div className="flex justify-between text-xs text-zinc-500 mb-1.5">
+          <div className="flex justify-between text-xs text-text-muted mb-1.5">
             <span>Preostalo termina</span>
-            <span className="font-medium text-zinc-100">
+            <span className="font-medium text-text-primary">
               {cp.remainingSessions} / {cp.package.totalSessions}
             </span>
           </div>
-          <div className="w-full rounded-full bg-zinc-800 h-2">
+          <div className="w-full rounded-full bg-surface-elevated h-2">
             <div
               className="rounded-full bg-orange-400 h-2 transition-all"
               style={{ width: `${pct}%` }}
             />
           </div>
           {cp.activatedAt && (
-            <p className="text-xs text-zinc-400 mt-2">Aktivirano: {formatDate(cp.activatedAt)}</p>
+            <p className="text-xs text-text-muted mt-2">Aktivirano: {formatDate(cp.activatedAt)}</p>
           )}
         </>
       )}
