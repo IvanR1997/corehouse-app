@@ -1,10 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import logo from '../../../public/logo.jpg'
 import { logout } from '@/app/actions/auth'
+import { ThemeLogo } from '@/components/ThemeLogo'
 
 type Props = {
   userName: string
@@ -41,7 +40,7 @@ export function Sidebar({ role, notificationCount = 0 }: Props) {
       <aside className="hidden md:flex w-52 min-h-screen bg-surface border-r border-border-subtle flex-col shrink-0">
         <div className="p-4 border-b border-border-subtle">
           <Link href="/dashboard">
-            <Image src={logo} alt="CoreHouse" className="w-full h-auto object-contain" />
+            <ThemeLogo className="w-full h-auto object-contain" />
           </Link>
         </div>
 
