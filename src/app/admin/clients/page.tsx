@@ -170,7 +170,7 @@ export default async function AdminClientsPage() {
                     <td className="px-3 md:px-5 py-4 text-right">
                       <Link
                         href={`/admin/clients/${client.id}/activate`}
-                        className="rounded-md bg-orange-500/10 border border-orange-500/30 px-3 py-1.5 text-xs font-medium text-orange-400 hover:bg-orange-500/15 transition-colors"
+                        className="rounded-md border border-border-subtle px-3 py-1.5 text-xs font-medium text-text-primary hover:bg-surface-elevated transition-colors"
                       >
                         Upravljaj paketima
                       </Link>
