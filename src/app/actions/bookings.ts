@@ -3,8 +3,17 @@
 import { revalidatePath } from 'next/cache'
 import { db } from '@/lib/db'
 import { requireRole } from '@/lib/dal'
+import { sendAdminEmail } from '@/lib/email'
 
 export type BookingState = { error?: string; success?: boolean } | undefined
+
+function formatDT(d: Date) {
+  return new Intl.DateTimeFormat('sr-RS', {
+    weekday: 'short', day: '2-digit', month: '2-digit',
+    year: 'numeric', hour: '2-digit', minute: '2-digit',
+    timeZone: 'Europe/Belgrade',
+  }).format(d)
+}
 
 function packageExpiry(activatedAt: Date) {
   const exp = new Date(activatedAt)
@@ -74,6 +83,11 @@ export async function createBooking(sessionId: string): Promise<BookingState> {
     }),
   ])
 
+  await sendAdminEmail(
+    '📅 Nova rezervacija — CoreHouse',
+    `${user.name} je rezervisao termin ${formatDT(session.startTime)}.`
+  )
+
   revalidatePath('/client/sessions')
   revalidatePath('/client/bookings')
   return { success: true }
@@ -138,6 +152,11 @@ export async function bookSlot(
     }),
   ])
 
+  await sendAdminEmail(
+    '📅 Nova rezervacija — CoreHouse',
+    `${user.name} je rezervisao termin ${formatDT(startDate)}.`
+  )
+
   revalidatePath('/client/sessions')
   revalidatePath('/client/bookings')
   return { success: true }
@@ -157,13 +176,6 @@ export async function cancelBooking(bookingId: string): Promise<BookingState> {
 
   const hoursUntil = (booking.session.startTime.getTime() - Date.now()) / (1000 * 60 * 60)
   const isLate = hoursUntil < 24
-
-  const formatDT = (d: Date) =>
-    new Intl.DateTimeFormat('sr-RS', {
-      weekday: 'short', day: '2-digit', month: '2-digit',
-      year: 'numeric', hour: '2-digit', minute: '2-digit',
-      timeZone: 'Europe/Belgrade',
-    }).format(d)
 
   if (isLate) {
     await db.booking.update({
@@ -196,6 +208,12 @@ export async function cancelBooking(bookingId: string): Promise<BookingState> {
       })
     })
   }
+
+  const cancelMsg = isLate
+    ? `❌ ${user.name} otkazao termin ${formatDT(booking.session.startTime)} — manje od 24h pre. Termin se računa kao iskorišćen.`
+    : `❌ ${user.name} otkazao termin ${formatDT(booking.session.startTime)}.`
+
+  await sendAdminEmail('Otkazivanje termina — CoreHouse', cancelMsg)
 
   revalidatePath('/client/bookings')
   revalidatePath('/client/sessions')
