@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
 import { db } from '@/lib/db'
 import { requireRole } from '@/lib/dal'
+import { VideoPlayer } from './VideoPlayer'
 
 const categoryLabel: Record<string, string> = {
   MOBILNOST: 'Mobilnost', CORE: 'Core', NOGE: 'Noge', LEDJA: 'Leđa',
@@ -85,43 +86,27 @@ export default async function ClientProgramDetailPage({ params }: { params: Prom
                       {section.exercises.map((ex) => (
                         <div
                           key={ex.id}
-                          className="flex items-start gap-4 rounded-lg border border-border-subtle bg-surface p-4"
+                          className="rounded-lg border border-border-subtle bg-surface p-4"
                         >
-                          {/* Thumbnail / play button placeholder */}
-                          <a
-                            href={ex.video.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex h-14 w-20 shrink-0 items-center justify-center rounded-md bg-surface-elevated border border-border-subtle hover:border-orange-500/50 transition-colors group"
-                            title="Pogledaj video"
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-orange-500 group-hover:scale-110 transition-transform">
-                              <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
-                            </svg>
-                          </a>
+                          {/* Video player — otvara se inline na klik */}
+                          <VideoPlayer url={ex.video.url} title={ex.video.title} />
 
                           {/* Info */}
-                          <div className="min-w-0 flex-1">
-                            <p className="font-medium text-text-primary text-sm leading-snug">{ex.video.title}</p>
-                            <div className="flex flex-wrap items-center gap-2 mt-1.5">
-                              <span className="rounded-full bg-orange-500/15 px-2 py-0.5 text-xs font-semibold text-orange-400">
-                                {ex.setsReps}
-                              </span>
-                              <span className="rounded-full bg-surface-elevated px-2 py-0.5 text-xs text-text-muted">
-                                {categoryLabel[ex.video.category] ?? ex.video.category}
-                              </span>
+                          <div className="flex items-start gap-3">
+                            <div className="min-w-0 flex-1">
+                              <p className="font-medium text-text-primary text-sm leading-snug">{ex.video.title}</p>
+                              <div className="flex flex-wrap items-center gap-2 mt-1.5">
+                                <span className="rounded-full bg-orange-500/15 px-2 py-0.5 text-xs font-semibold text-orange-400">
+                                  {ex.setsReps}
+                                </span>
+                                <span className="rounded-full bg-surface-elevated px-2 py-0.5 text-xs text-text-muted">
+                                  {categoryLabel[ex.video.category] ?? ex.video.category}
+                                </span>
+                              </div>
+                              {ex.note && (
+                                <p className="text-xs text-text-muted mt-1.5 italic">{ex.note}</p>
+                              )}
                             </div>
-                            {ex.note && (
-                              <p className="text-xs text-text-muted mt-1.5 italic">{ex.note}</p>
-                            )}
-                            <a
-                              href={ex.video.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="mt-1.5 inline-block text-xs font-medium text-orange-500 hover:underline"
-                            >
-                              Pogledaj video →
-                            </a>
                           </div>
                         </div>
                       ))}
