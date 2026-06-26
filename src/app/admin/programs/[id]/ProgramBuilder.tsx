@@ -1,6 +1,7 @@
 'use client'
 
 import { useActionState, useTransition, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   addTraining, deleteTraining,
   addSection, deleteSection,
@@ -160,11 +161,18 @@ function AddExerciseForm({ sectionId, programId, allVideos }: { sectionId: strin
 
 // ─── Delete button ────────────────────────────────────────────────────────────
 
-function DeleteBtn({ onDelete, label = 'Obrisati' }: { onDelete: () => void; label?: string }) {
+function DeleteBtn({ onDelete, label = 'Obrisati' }: { onDelete: () => Promise<void>; label?: string }) {
   const [isPending, startTransition] = useTransition()
+  const router = useRouter()
   return (
     <button
-      onClick={() => { if (confirm(`${label}?`)) startTransition(onDelete) }}
+      onClick={() => {
+        if (!confirm(`${label}?`)) return
+        startTransition(async () => {
+          await onDelete()
+          router.refresh()
+        })
+      }}
       disabled={isPending}
       className="rounded p-1 text-text-muted hover:text-red-400 hover:bg-red-500/10 disabled:opacity-50 transition-colors"
     >
