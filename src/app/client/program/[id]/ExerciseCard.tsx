@@ -65,12 +65,12 @@ export function ExerciseCard({ url, title, category, setsReps, note }: Props) {
           className="relative flex h-14 w-24 shrink-0 items-center justify-center rounded-lg overflow-hidden border border-border-subtle hover:border-orange-500/60 transition-colors group"
           title={open ? 'Zatvori video' : 'Pogledaj video'}
         >
-          {thumbnail ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={thumbnail} alt={title} className="absolute inset-0 w-full h-full object-cover" />
-          ) : (
-            <div className="absolute inset-0 bg-surface-elevated" />
-          )}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={thumbnail ?? '/logo.jpg'}
+            alt={title}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
           {/* Overlay */}
           <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
           {/* Icon */}
