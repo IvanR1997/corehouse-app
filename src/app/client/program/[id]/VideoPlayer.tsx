@@ -5,9 +5,9 @@ import { useState } from 'react'
 function getYouTubeId(url: string): string | null {
   try {
     const u = new URL(url)
+    if (u.pathname.includes('/shorts/')) return u.pathname.split('/shorts/')[1].split('?')[0]
     if (u.hostname.includes('youtube.com')) return u.searchParams.get('v')
-    if (u.hostname === 'youtu.be') return u.pathname.slice(1)
-    if (u.pathname.includes('/shorts/')) return u.pathname.split('/shorts/')[1]
+    if (u.hostname === 'youtu.be') return u.pathname.slice(1).split('?')[0]
   } catch {}
   return null
 }
