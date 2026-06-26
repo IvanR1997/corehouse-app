@@ -15,7 +15,7 @@ export default function NewProgramPage() {
       <div className="mb-6">
         <Link href="/admin/programs" className="text-sm text-orange-500 hover:underline">← Nazad na programe</Link>
         <h1 className="text-2xl font-bold text-text-primary mt-2">Novi program</h1>
-        <p className="text-sm text-text-muted mt-1">Treninzi i vježbe se dodaju u sljedećem koraku.</p>
+        <p className="text-sm text-text-muted mt-1">Treninzi i vežbe se dodaju u sledećem koraku.</p>
       </div>
 
       {state?.error && (

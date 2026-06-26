@@ -44,7 +44,7 @@ export function VideoForm({ action, defaultValues = {}, submitLabel = 'Sačuvaj'
 
       <form action={formAction} className="space-y-5">
         <div>
-          <label className="block text-sm font-medium text-text-secondary mb-1">Naziv vježbe</label>
+          <label className="block text-sm font-medium text-text-secondary mb-1">Naziv vežbe</label>
           <input name="title" type="text" required defaultValue={defaultValues.title} placeholder="npr. Plank na pilates lopti" className={inputCls} />
         </div>
         <div>

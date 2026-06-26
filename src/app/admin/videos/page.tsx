@@ -87,7 +87,7 @@ export default async function AdminVideosPage() {
                           <td className="px-3 md:px-5 py-3.5 hidden md:table-cell">
                             <span className="text-xs text-text-muted">
                               {video._count.exercises > 0
-                                ? `Korišćen u ${video._count.exercises} vježbi`
+                                ? `Korišćen u ${video._count.exercises} vežbi`
                                 : 'Nije korišćen'}
                             </span>
                           </td>

@@ -115,7 +115,7 @@ function AddExerciseForm({ sectionId, programId, allVideos }: { sectionId: strin
       {!open ? (
         <button onClick={() => setOpen(true)} className="flex items-center gap-1.5 text-xs text-text-muted hover:text-orange-500 transition-colors py-1">
           <span className="w-4 h-4 rounded-full bg-surface-elevated flex items-center justify-center">+</span>
-          Dodaj vježbu
+          Dodaj vežbu
         </button>
       ) : (
         <div className="rounded-lg border border-orange-500/30 bg-orange-500/5 p-3 mt-2">
@@ -148,7 +148,7 @@ function AddExerciseForm({ sectionId, programId, allVideos }: { sectionId: strin
               </div>
             </div>
             <div className="flex gap-2">
-              <button type="submit" className="rounded-lg bg-orange-500 px-4 py-1.5 text-xs font-semibold text-zinc-950 hover:bg-orange-400">Dodaj vježbu</button>
+              <button type="submit" className="rounded-lg bg-orange-500 px-4 py-1.5 text-xs font-semibold text-zinc-950 hover:bg-orange-400">Dodaj vežbu</button>
               <button type="button" onClick={() => setOpen(false)} className="rounded-lg border border-border-subtle px-3 py-1.5 text-xs text-text-muted">Otkaži</button>
             </div>
           </form>
@@ -200,7 +200,7 @@ export function ProgramBuilder({ program, allVideos }: { program: Program; allVi
               </span>
               <h3 className="font-bold text-text-primary">{training.title}</h3>
             </div>
-            <DeleteBtn label="Obrisati ovaj trening i sve vježbe" onDelete={() => deleteTraining(training.id, program.id)} />
+            <DeleteBtn label="Obrisati ovaj trening i sve vežbe" onDelete={() => deleteTraining(training.id, program.id)} />
           </div>
 
           <div className="bg-surface-card p-5 space-y-4">
@@ -212,7 +212,7 @@ export function ProgramBuilder({ program, allVideos }: { program: Program; allVi
                 </div>
                 <div className="px-4 py-2 divide-y divide-border-subtle">
                   {section.exercises.length === 0 ? (
-                    <p className="text-xs text-text-muted py-2">Nema vježbi — dodajte ispod.</p>
+                    <p className="text-xs text-text-muted py-2">Nema vežbi — dodajte ispod.</p>
                   ) : section.exercises.map((ex) => (
                     <div key={ex.id} className="flex items-start justify-between py-2.5">
                       <div>
@@ -225,7 +225,7 @@ export function ProgramBuilder({ program, allVideos }: { program: Program; allVi
                         {ex.note && <p className="text-xs text-text-muted mt-0.5">{ex.note}</p>}
                         <a href={ex.video.url} target="_blank" rel="noopener noreferrer" className="text-xs text-orange-500 hover:underline mt-0.5 inline-block">Video →</a>
                       </div>
-                      <DeleteBtn label="Obrisati vježbu" onDelete={() => deleteExercise(ex.id, program.id)} />
+                      <DeleteBtn label="Obrisati vežbu" onDelete={() => deleteExercise(ex.id, program.id)} />
                     </div>
                   ))}
                 </div>
