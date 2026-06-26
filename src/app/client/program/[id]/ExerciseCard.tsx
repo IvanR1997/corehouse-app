@@ -73,7 +73,9 @@ export function ExerciseCard({ url, title, category, setsReps, note }: Props) {
             {setsReps}
           </span>
           {note && (
-            <p className="text-xs text-text-muted mt-1.5 italic leading-tight max-w-[130px]">{note}</p>
+            <span className="mt-1.5 block rounded-lg bg-surface-elevated border border-border-subtle px-3 py-1.5 text-xs font-medium text-text-secondary leading-tight">
+              {note}
+            </span>
           )}
         </div>
       </div>
