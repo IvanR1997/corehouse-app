@@ -60,6 +60,7 @@ function AddSectionForm({ trainingId, programId }: { trainingId: string; program
   const boundAction = addSection.bind(null, trainingId, programId)
   const [state, action] = useActionState(boundAction, undefined)
   const [open, setOpen] = useState(false)
+  const [title, setTitle] = useState('')
 
   return (
     <div className="mt-3">
@@ -78,21 +79,26 @@ function AddSectionForm({ trainingId, programId }: { trainingId: string; program
               <button
                 key={p}
                 type="button"
-                onClick={(e) => {
-                  const form = e.currentTarget.closest('form')!
-                  const input = form.querySelector<HTMLInputElement>('[name="title"]')!
-                  input.value = p
-                }}
-                className="rounded-full bg-surface-elevated px-2.5 py-0.5 text-xs text-text-muted hover:bg-orange-500/20 hover:text-orange-400 transition-colors"
+                onClick={() => setTitle(p)}
+                className={`rounded-full px-2.5 py-0.5 text-xs transition-colors ${title === p ? 'bg-orange-500 text-zinc-950 font-semibold' : 'bg-surface-elevated text-text-muted hover:bg-orange-500/20 hover:text-orange-400'}`}
               >
                 {p}
               </button>
             ))}
           </div>
-          <form action={async (fd) => { await action(fd); setOpen(false) }} className="flex gap-2">
-            <input name="title" type="text" required autoFocus placeholder="Naziv sekcije" className={inputCls} />
+          <form action={async (fd) => { await action(fd); setOpen(false); setTitle('') }} className="flex gap-2">
+            <input
+              name="title"
+              type="text"
+              required
+              autoFocus
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Naziv sekcije"
+              className={inputCls}
+            />
             <button type="submit" className="rounded-lg bg-orange-500 px-3 py-2 text-xs font-semibold text-zinc-950 hover:bg-orange-400">Dodaj</button>
-            <button type="button" onClick={() => setOpen(false)} className="rounded-lg border border-border-subtle px-2 py-2 text-xs text-text-muted">✕</button>
+            <button type="button" onClick={() => { setOpen(false); setTitle('') }} className="rounded-lg border border-border-subtle px-2 py-2 text-xs text-text-muted">✕</button>
           </form>
         </div>
       )}
