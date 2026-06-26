@@ -2,38 +2,44 @@
 
 import { useState } from 'react'
 
-function getYouTubeId(url: string): string | null {
+type EmbedInfo = { type: 'youtube'; id: string } | { type: 'gdrive'; id: string } | null
+
+function getEmbedInfo(url: string): EmbedInfo {
   try {
     const u = new URL(url)
-    if (u.pathname.includes('/shorts/')) return u.pathname.split('/shorts/')[1].split('?')[0]
-    if (u.hostname.includes('youtube.com')) return u.searchParams.get('v')
-    if (u.hostname === 'youtu.be') return u.pathname.slice(1).split('?')[0]
+    // Google Drive
+    if (u.hostname.includes('drive.google.com')) {
+      const match = u.pathname.match(/\/file\/d\/([^/]+)/)
+      if (match) return { type: 'gdrive', id: match[1] }
+      const id = u.searchParams.get('id')
+      if (id) return { type: 'gdrive', id }
+    }
+    // YouTube Shorts
+    if (u.pathname.includes('/shorts/')) return { type: 'youtube', id: u.pathname.split('/shorts/')[1].split('?')[0] }
+    // YouTube regular
+    if (u.hostname.includes('youtube.com')) {
+      const v = u.searchParams.get('v')
+      if (v) return { type: 'youtube', id: v }
+    }
+    if (u.hostname === 'youtu.be') return { type: 'youtube', id: u.pathname.slice(1).split('?')[0] }
   } catch {}
   return null
 }
 
+function getEmbedSrc(info: NonNullable<EmbedInfo>): string {
+  if (info.type === 'gdrive') return `https://drive.google.com/file/d/${info.id}/preview`
+  return `https://www.youtube.com/embed/${info.id}?autoplay=1&rel=0`
+}
+
 export function VideoPlayer({ url, title }: { url: string; title: string }) {
   const [open, setOpen] = useState(false)
-  const ytId = getYouTubeId(url)
+  const embedInfo = getEmbedInfo(url)
 
-  if (!ytId) {
-    return (
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex h-14 w-20 shrink-0 items-center justify-center rounded-md bg-surface-elevated border border-border-subtle hover:border-orange-500/50 transition-colors group"
-      >
-        <PlayIcon />
-      </a>
-    )
-  }
-
-  if (open) {
+  if (open && embedInfo) {
     return (
       <div className="w-full rounded-xl overflow-hidden border border-border-subtle mb-3" style={{ aspectRatio: '16/9' }}>
         <iframe
-          src={`https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`}
+          src={getEmbedSrc(embedInfo)}
           title={title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
