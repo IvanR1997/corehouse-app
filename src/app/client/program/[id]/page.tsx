@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
 import { db } from '@/lib/db'
 import { requireRole } from '@/lib/dal'
-import { VideoPlayer } from './VideoPlayer'
+import { ExerciseCard } from './ExerciseCard'
 
 const categoryLabel: Record<string, string> = {
   MOBILNOST: 'Mobilnost', CORE: 'Core', NOGE: 'Noge', LEDJA: 'Leđa',
@@ -84,31 +84,14 @@ export default async function ClientProgramDetailPage({ params }: { params: Prom
                     {/* Exercises — 2-column layout on desktop */}
                     <div className="px-5 py-3 grid gap-3 sm:grid-cols-2">
                       {section.exercises.map((ex) => (
-                        <div
+                        <ExerciseCard
                           key={ex.id}
-                          className="rounded-lg border border-border-subtle bg-surface p-4"
-                        >
-                          {/* Video player — otvara se inline na klik */}
-                          <VideoPlayer url={ex.video.url} title={ex.video.title} />
-
-                          {/* Info */}
-                          <div className="flex items-start gap-3">
-                            <div className="min-w-0 flex-1">
-                              <p className="font-medium text-text-primary text-sm leading-snug">{ex.video.title}</p>
-                              <div className="flex flex-wrap items-center gap-2 mt-1.5">
-                                <span className="rounded-full bg-orange-500/15 px-2 py-0.5 text-xs font-semibold text-orange-400">
-                                  {ex.setsReps}
-                                </span>
-                                <span className="rounded-full bg-surface-elevated px-2 py-0.5 text-xs text-text-muted">
-                                  {categoryLabel[ex.video.category] ?? ex.video.category}
-                                </span>
-                              </div>
-                              {ex.note && (
-                                <p className="text-xs text-text-muted mt-1.5 italic">{ex.note}</p>
-                              )}
-                            </div>
-                          </div>
-                        </div>
+                          url={ex.video.url}
+                          title={ex.video.title}
+                          category={categoryLabel[ex.video.category] ?? ex.video.category}
+                          setsReps={ex.setsReps}
+                          note={ex.note}
+                        />
                       ))}
                     </div>
                   </div>
