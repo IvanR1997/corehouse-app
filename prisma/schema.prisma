@@ -19,6 +19,7 @@ model User {
   bookings        Booking[]
   trainedSessions Session[]        @relation("TrainerSessions")
   packageRequests PackageRequest[]
+  programAccess   ProgramAccess[]
 }
 
 model Package {
@@ -91,6 +92,74 @@ model AdminNotification {
   createdAt DateTime @default(now())
 }
 
+// ─── Online Program ───────────────────────────────────────────────────────────
+
+model Video {
+  id          String        @id @default(cuid())
+  title       String
+  url         String
+  category    VideoCategory
+  description String?
+  createdAt   DateTime      @default(now())
+
+  exercises ProgramExercise[]
+}
+
+model Program {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  trainings ProgramTraining[]
+  access    ProgramAccess[]
+}
+
+model ProgramTraining {
+  id        String @id @default(cuid())
+  programId String
+  order     Int
+  title     String
+
+  program  Program          @relation(fields: [programId], references: [id], onDelete: Cascade)
+  sections ProgramSection[]
+}
+
+model ProgramSection {
+  id         String @id @default(cuid())
+  trainingId String
+  order      Int
+  title      String
+
+  training  ProgramTraining   @relation(fields: [trainingId], references: [id], onDelete: Cascade)
+  exercises ProgramExercise[]
+}
+
+model ProgramExercise {
+  id        String  @id @default(cuid())
+  sectionId String
+  videoId   String
+  order     Int
+  setsReps  String
+  note      String?
+
+  section ProgramSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  video   Video          @relation(fields: [videoId], references: [id])
+}
+
+model ProgramAccess {
+  id        String   @id @default(cuid())
+  userId    String
+  programId String
+  grantedAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  program Program @relation(fields: [programId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, programId])
+}
+
 enum Role {
   ADMIN
   TRAINER
@@ -106,4 +175,17 @@ enum PackageRequestStatus {
   PENDING
   APPROVED
   REJECTED
+}
+
+enum VideoCategory {
+  MOBILNOST
+  CORE
+  NOGE
+  LEDJA
+  GRUDI
+  RAMENA
+  BICEPS
+  TRICEPS
+  KARDIO
+  OSTALO
 }

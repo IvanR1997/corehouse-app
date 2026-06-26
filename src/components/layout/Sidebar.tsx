@@ -16,6 +16,7 @@ const roleLinks: Record<string, { href: string; label: string; icon: React.React
     { href: '/client/sessions', label: 'Termini', icon: <CalendarIcon /> },
     { href: '/client/bookings', label: 'Rezervacije', icon: <BookingIcon /> },
     { href: '/client/packages', label: 'Paketi', icon: <PackageIcon /> },
+    { href: '/client/program', label: 'Online program', icon: <ProgramIcon /> },
   ],
   TRAINER: [
     { href: '/trainer/schedule', label: 'Raspored', icon: <CalendarIcon /> },
@@ -27,6 +28,8 @@ const roleLinks: Record<string, { href: string; label: string; icon: React.React
     { href: '/admin/packages', label: 'Paketi', icon: <PackageIcon /> },
     { href: '/admin/requests', label: 'Zahtevi', icon: <RequestIcon /> },
     { href: '/admin/notifications', label: 'Obaveštenja', icon: <BellIcon /> },
+    { href: '/admin/programs', label: 'Programi', icon: <ProgramIcon /> },
+    { href: '/admin/videos', label: 'Video biblioteka', icon: <VideoIcon /> },
   ],
 }
 
@@ -189,6 +192,24 @@ function LogoutIcon() {
       <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
       <polyline points="16 17 21 12 16 7" />
       <line x1="21" y1="12" x2="9" y2="12" />
+    </svg>
+  )
+}
+
+function ProgramIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+    </svg>
+  )
+}
+
+function VideoIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="23 7 16 12 23 17 23 7" />
+      <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
     </svg>
   )
 }
